@@ -12,12 +12,14 @@ from django.conf.urls.defaults import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('web.views',
     # Examples:
     # url(r'^$', 'smarty.views.home', name='home'),
     
-    url(r'^', include('web.urls')),
-
+    url(r'^$', 'main'),
+    #url(r'^login', include('login')),
+    #url(r'^logout', include('logout')),
+    
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

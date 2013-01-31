@@ -1,18 +1,39 @@
+# -*- coding: utf-8 -*-
+
+#########################################################################
 # Django settings for smarty project.
+# author Alex Bogdanovich
+# 2013 
+#########################################################################
+
+import os, sys
+import socket
+import logging
+import djcelery
+
+djcelery.setup_loader()
+
+hostname = socket.gethostname()
+
+PROJECT_ROOT= os.path.realpath(os.path.dirname(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+     ('Alex Bogdanovich', 'bogdanovich.alex@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
+## Celery config ##
+BROKER_URL = 'redis://localhost:6379/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}  # 1 hour.
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '/home/alex/django/db/smarty.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -89,7 +110,7 @@ SECRET_KEY = 'rps9=!vo+vfub%4ajl1*7gp#@ig&#bmm(@9^($8#ga&*0)a&48'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -102,11 +123,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'smarty.urls'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+TEMPLATE_DIRS = ( os.path.join(PROJECT_ROOT, 'templates'),)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -115,6 +132,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'smarty.web',
+    'djcelery',
+    
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
