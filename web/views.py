@@ -20,7 +20,6 @@ import pprint     # pretty print the lists
 #import random
 from django.http import HttpResponse
 from django.template import loader, Context
-#import csv
 #import operator
 
 #########################################################################

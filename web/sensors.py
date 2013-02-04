@@ -7,16 +7,25 @@
 #########################################################################
 
 #########################################################################
-#Sensors classes
+#Sensors functions
 #########################################################################
 
-class Sensor:
-    def __init__(self, uid, alias, type, status, value, date, access_time):
-        self.uid = uid
-        self.alias = alias
-        self.type = type
-        self.status = status
-        self.value = value
-        self.access_time = access_time
-        return self.uid
+def add_sensor():
+    sensor = []
+    
+    return sensor
 
+def get_sensor():
+    sensor = []
+    
+    return sensor
+
+def get_sensors_list():
+    sensors_list = []
+    
+    return sensors_list
+
+def update_sensor():
+    sensor = []
+    
+    return sensor
