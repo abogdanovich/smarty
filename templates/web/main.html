@@ -3,6 +3,21 @@
 
 {% block main %}
 
-1-wire sensors
+<h2>1-wire sensors </h2>
+Active sensors: <br/>
+
+{% for s in slist %}
+	#{{ forloop.counter }} sensor:  {{ s.address }} | {{ s.type }} - 
+	
+	{% if s.temperature %}
+		{{ s.temperature }}
+	{% endif %}
+	
+	{% if s.PIO_ALL %}
+		{{ s.PIO_ALL }}
+	{% endif %}
+	
+	<br/>
+{% endfor %}
 
 {% endblock %}
