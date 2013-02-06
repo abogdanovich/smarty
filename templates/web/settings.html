@@ -1,0 +1,12 @@
+{% extends "web/index.html" %}
+{% block page_title %}<h3>Настройки</h3>{% endblock %}
+
+{% block settings %}
+
+settings
+
+{% if error %}
+	<font color="red">{{ error }}</font>
+{% endif %}
+
+{% endblock %}

@@ -35,3 +35,59 @@ TIMEZONE = "Europe/Minsk"
 ADMIN_EMAIL = "abogdanovich@minsk.ximxim.com"
 
 #########################################################################
+
+# seconds into hh:mm converter
+
+def convert_seconds(secs):
+
+    total   = secs
+    hours   = total / 3600
+    total   = total - (hours * 3600)
+    mins    = total / 60
+
+    return "%02d:%02d" % (hours, mins)
+
+#########################################################################
+
+# convert str datetime into UNIX (int) format
+
+def get_unix_strdtime(sel, dtime):
+    if sel == 'date':
+        return int(time.mktime(time.strptime(dtime, "%Y-%m-%d")))
+    elif sel == 'time':
+        return int(time.mktime(time.strptime(dtime, "%H:%M")))
+    else:
+        return int(time.mktime(time.strptime(dtime, "%Y-%m-%d %H:%M")))
+
+
+#########################################################################
+
+# convert UTCNOW datetime into UNIX format
+
+def get_unix_datetime():
+
+    dt = datetime.datetime.utcnow()
+    sdate = dt.strftime('%Y-%m-%d %H:%M')
+
+    return int(time.mktime(time.strptime(sdate, "%Y-%m-%d %H:%M")))
+    
+#########################################################################
+
+# convert UNIX timestamp format into datetime
+
+def convert_unix_date(sel, timestamp):
+    if sel == 'date':
+        dt_obj = datetime.datetime.fromtimestamp(timestamp)
+	return pytz.timezone(TIMEZONE).fromutc(dt_obj).strftime("%Y-%m-%d")
+    elif sel == 'time':
+        dt_obj = datetime.datetime.fromtimestamp(timestamp)
+        return pytz.timezone(TIMEZONE).fromutc(dt_obj).strftime("%H:%M")
+    elif sel == 'stattime':
+        dt_obj = datetime.datetime.fromtimestamp(timestamp)
+        return pytz.timezone(TIMEZONE).fromutc(dt_obj).strftime("%H")
+    else:
+        dt_obj = datetime.datetime.fromtimestamp(timestamp)
+        return pytz.timezone(TIMEZONE).fromutc(dt_obj).strftime("%Y-%m-%d %H:%M")
+
+#########################################################################
+

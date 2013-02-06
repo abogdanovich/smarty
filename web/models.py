@@ -12,7 +12,8 @@ from django.db import models
 class Dsensor(models.Model): #Temperature sensor
     address = models.CharField(max_length=30) #10.12AB23431211
     alias = models.CharField(max_length=30) #10.12AB23431211 > we use WATER_OUTSIDE_1 for better usage
-    status = models.IntegerField(default=0) # status 0 - disabled, 1 - active
+    active = models.IntegerField(default=0) # 1 - active (working right now), 0 - sleep state
+    locked = models.IntegerField(default=0) # 1 locked (can't work) by smarty or human - critical errors, 0 - can work - no errors
     def __unicode__(self):
         return self.address
     
@@ -30,7 +31,8 @@ class Ssensor(models.Model): #Switch sensor
   
     address = models.CharField(max_length=30) #10.12AB23431211
     alias = models.CharField(max_length=30) #10.12AB23431211 > we use LIGHT_OUTSIDE_1 for better usage
-    status = models.IntegerField(default=0) # status 0 - disabled, 1 - active
+    active = models.IntegerField(default=0) # 1 - active (working right now), 0 - sleep state
+    locked = models.IntegerField(default=0) # 1 locked (can't work) by smarty or human - critical errors, 0 - can work - no errors
     def __unicode__(self):
         return self.address
 #switch sensors data like DS2408 read\write 
@@ -63,7 +65,7 @@ class Alert(models.Model): #Alerts
 
 #monitor all actions in the smarty system
 class Monitor(models.Model): #Alerts
-    action = models.CharField(max_length=50) #smarty monitoring log for user review
+    action = models.CharField(max_length=100) #smarty monitoring log for user review
     date = models.IntegerField()
     status = models.IntegerField() #0 - normal state (works fine), > 0 - error = alert id is used
     
@@ -79,10 +81,15 @@ class Monitor(models.Model): #Alerts
 #celery run tasks each minute for all active sensors - but run only allowed actions - cases for summer\winter seasons...
 class Calendar(models.Model): #Calendar for sensors
     sensor = models.IntegerField() #sensor id
-    date = models.IntegerField() #yyyy-mm-dd-hh-mm(-ss)
+    
+    #from '2013-01-01 00:00' (jan 2013) = 1357020000 till '2013-02-01 00:00' (feb 2013) 1362117600 (1 month)
+    start_date = models.IntegerField() #yyyy-mm-dd-hh-mm(-ss) 
+    end_date = models.IntegerField() #yyyy-mm-dd-hh-mm(-ss)
+    
+    #from '00:00' = 2208967200 = till 2208960000 '02:00' = 2 hours of sensor work
     start_time = models.IntegerField() #start action time in int format like hh-mm
     end_time = models.IntegerField() #end action time in int format like hh-mm
-    status = models.IntegerField(default=0) #1 - active, 0 - manually blocked (reason), Ssenso will not start until status = 0
+    locked = models.IntegerField(default=0) #1 - locked, 0 - manually blocked (reason), Ssensor will not start until status = 0
     
     def __unicode__(self):
         return self.sensor

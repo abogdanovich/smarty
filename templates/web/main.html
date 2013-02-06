@@ -1,23 +1,32 @@
 {% extends "web/index.html" %}
-{% block page_title %}Sensors{% endblock %}
+{% block page_title %}<h3>Система</h3>{% endblock %}
 
 {% block main %}
 
-<h2>1-wire sensors </h2>
-Active sensors: <br/>
+{% if slist %}
+Список активных сенсоров: <br/>	<br/>
+	{% for s in slist %}
+		#{{ forloop.counter }} sensor:  {{ s.address }} | {{ s.type }} - 
+		
+		{% if s.temperature %}
+			{{ s.temperature }}
+		{% endif %}
+		
+		{% if s.PIO_ALL %}
+			{{ s.PIO_ALL }}
+		{% endif %}
+		
+		<form action="demo_form.asp">
+		<input type="text" name="sensor_address" value="{{ s.address }}"/>
+		<input type="text" name="sensor_alias" value="s_"/>
+		<input type="submit" value="сохранить сенсор" />
+	        </form>
+		
+	{% endfor %}
+{% endif %}
 
-{% for s in slist %}
-	#{{ forloop.counter }} sensor:  {{ s.address }} | {{ s.type }} - 
-	
-	{% if s.temperature %}
-		{{ s.temperature }}
-	{% endif %}
-	
-	{% if s.PIO_ALL %}
-		{{ s.PIO_ALL }}
-	{% endif %}
-	
-	<br/>
-{% endfor %}
+{% if error %}
+	<font color="red">{{ error }}</font>
+{% endif %}
 
 {% endblock %}

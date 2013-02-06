@@ -1,0 +1,12 @@
+{% extends "web/index.html" %}
+{% block page_title %}<h3>Сенсоры</h3>{% endblock %}
+
+{% block sensors %}
+
+sensors
+
+{% if error %}
+	<font color="red">{{ error }}</font>
+{% endif %}
+
+{% endblock %}
