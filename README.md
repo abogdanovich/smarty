@@ -29,3 +29,7 @@ Smarty Home System
 *usefull console commands*
 - dmesg: check connected all devices
 - lsusb: check connected usb devices
+
+*django*
+- django web framework
+- python
