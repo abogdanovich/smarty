@@ -24,6 +24,14 @@ import utils
 
 def main(request):
 
+    error = ''
+    d = dict(request=request, error=error)
+    return render_to_response('web/main.html', d, context_instance=RequestContext(request))
+
+#########################################################################
+
+def sensors(request):
+
     slist = []
     error = ''
     
@@ -36,14 +44,7 @@ def main(request):
         error = 'OWFS  Network problems'
     
     d = dict(request=request, slist=slist, error=error)
-    return render_to_response('web/main.html', d, context_instance=RequestContext(request))
-
-#########################################################################
-
-def sensors(request):
-
-    error = ''
-    d = dict(request=request, error=error)
+    
     return render_to_response('web/sensors.html', d, context_instance=RequestContext(request))
 
 #########################################################################
