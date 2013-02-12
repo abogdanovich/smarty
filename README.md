@@ -33,3 +33,6 @@ Smarty Home System
 *django*
 - django web framework
 - python
+
+*celery*
+- cmd: python manage.py celeryd -v 2 -B -s celery -E -l INFO  

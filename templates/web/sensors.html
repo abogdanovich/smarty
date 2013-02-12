@@ -3,10 +3,11 @@
 
 {% block sensors %}
 
+
 {% if slist %}
 Список активных сенсоров: <br/>	<br/>
 	{% for s in slist %}
-		#{{ forloop.counter }} sensor:  {{ s.address }} | {{ s.type }} - 
+		#{{ forloop.counter }} sensor:  {{ s.address }} | family: {{ s.family }} data: { 
 		
 		{% if s.temperature %}
 			{{ s.temperature }}
@@ -16,17 +17,19 @@
 			{{ s.PIO_ALL }}
 		{% endif %}
 		
-		<form action="demo_form.asp">
+		}
+		<form action="/sensors/" method="post">
+		{% csrf_token %}
 		<input type="text" name="sensor_address" value="{{ s.address }}"/>
 		<input type="text" name="sensor_alias" value="s_"/>
-		<input type="submit" value="сохранить сенсор" />
+		<input type="submit" name="add_sensor" value="сохранить сенсор" />
 	        </form>
 		
 	{% endfor %}
 {% endif %}
 
-{% if error %}
-	<font color="red">{{ error }}</font>
+{% if message %}
+	<font color="blue">{{ message }}</font>
 {% endif %}
 
 {% endblock %}

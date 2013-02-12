@@ -3,8 +3,13 @@
 
 {% block main %}
 
-{% if error %}
-	<font color="red">{{ error }}</font>
+saved sensors <br/>
+{% for s in sensors %}
+	{{ s.id }} {{ s.alias}} {{ s.address }} <br/>
+{% endfor %}
+
+{% if message %}
+	<font color="blue">{{ message }}</font>
 {% endif %}
 
 {% endblock %}

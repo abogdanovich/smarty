@@ -7,7 +7,7 @@
 #########################################################################
 
 
-#from timecard.models import User, UserTime, UserPost, UserPostComment, CalendarDaysOff, UserModule, UserMissedHours, Boss_notice, User_duty, Projects, UserProjectAssignments
+from web.models import Sensor, Temperature, Controller, Alert, Monitor, Calendar
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -19,14 +19,9 @@ import calendar
 import datetime
 import time
 import pytz
-#import Image, ImageFilter, ImageDraw
-#import operator
-#import itertools
-import pprint     # pretty print the lists
+import pprint  
 import os
-#import random
 import logging
-#from django.db.models import Q
 #########################################################################
 
 #Global settings
@@ -34,6 +29,42 @@ import logging
 TIMEZONE = "Europe/Minsk"
 ADMIN_EMAIL = "abogdanovich@minsk.ximxim.com"
 
+
+#########################################################################
+#Sensors functions
+#########################################################################
+
+def add_sensor(sensor_address, sensor_alias):
+    
+    flag = 0
+
+    try:
+        sensor = Sensor.objects.get(address=sensor_address)
+        sensor.delete()
+    except Sensor.DoesNotExist:
+        sensor= Sensor(address=sensor_address, alias=sensor_alias, active=0, locked=0)
+        sensor.save()
+
+    return sensor.id
+
+#get sensor object
+def get_sensor(sensor_address):
+    
+    try:
+        sensor = Sensor.objects.get(address=sensor_address)
+    except Sensor.DoesNotExist:
+        sensor = []
+    
+    return sensor
+
+#get sensor object
+def get_sensors():
+    sensors = Sensor.objects.all()
+    
+    return sensors
+
+#########################################################################
+# other utils
 #########################################################################
 
 # seconds into hh:mm converter
