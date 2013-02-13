@@ -5,7 +5,7 @@
 
 
 {% if slist %}
-Список активных сенсоров: <br/>	<br/>
+Список найденных OWFS сенсоров: <br/>	<br/>
 	{% for s in slist %}
 		#{{ forloop.counter }} sensor:  {{ s.address }} | family: {{ s.family }} data: { 
 		
@@ -18,12 +18,23 @@
 		{% endif %}
 		
 		}
+		{% if s.alias %}
+		<form action="/sensors/" method="post">
+		{% csrf_token %}
+		<input type="text" name="sensor_address" value="{{ s.address }}" style="background-color: green;"/>
+		<input type="text" name="sensor_alias" value="{{ s.alias }}" style="background-color: green;"/>
+		<input type="submit" name="add_sensor" value="обновить сенсор" />
+	        </form>
+		{% else %}
 		<form action="/sensors/" method="post">
 		{% csrf_token %}
 		<input type="text" name="sensor_address" value="{{ s.address }}"/>
-		<input type="text" name="sensor_alias" value="s_"/>
+		<input type="text" name="sensor_alias" value="f1_"/>
+		<input type="hidden" name="sensor_family" value="{{ s.family }}"/>
 		<input type="submit" name="add_sensor" value="сохранить сенсор" />
-	        </form>
+	        </form>	
+		{% endif %}	
+	
 		
 	{% endfor %}
 {% endif %}

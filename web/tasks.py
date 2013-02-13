@@ -9,24 +9,56 @@
 
 from celery.task import periodic_task
 from celery.schedules import crontab
+import utils
 
 #########################################################################
-#test func
-@periodic_task(ignore_result=True, run_every=crontab(hour="*", minute="*/1", day_of_week="*"))
-def test_print():
-    n = 1+1
-    print "celery test message % s" % (n)
-    
-#########################################################################
-
-# TODO: сделать возможно управлять поливом и освещением по месячно, динамично меняя через web сайт
-# тогда система будет каждую минуту будет проверять в базе на дату и время (можно ли это сделать)
 
 #########################################################################
 # task1 опрос датчиков температуры, влажности воздуха, датчика осадков
 # period = всегда каждые 5 минут
 # сохранение данных, построение графиков температуры, влажности
 #########################################################################
+# for test - опрос каждую минуту
+
+@periodic_task(ignore_result=True, run_every=crontab(hour="*", minute="*/1", day_of_week="*"))
+def get_temperature():
+    # берем все датчики и по очереди каждого опрашиваем
+    sensors = utils.get_sensors(28) #get only 28 family type sensors
+    print  "датчики %s " % sensors
+    #заносим в монитор события опроса
+    message = u"программа получения температуры стратовала"
+    utils.save_monitor(message, 0)
+    
+    for s in sensors:
+	try:
+	    ow.init(utils.owserver)
+	    s_temp = 0
+	    s_temp = ow.Sensor('/' + s.address).temperature
+	    # если было накопление error на сенсоре- обнуляем его в случае нормальной работы
+	    
+	    if s_temp:
+		if utils.save_temperature(s.address, s_temp):
+		    message = u"сохранения данных датчика: %s" % (s.alias)
+		    #print message
+		    utils.save_monitor(message, 0)
+		else:
+		    message = u"ошибка сохранения данных датчика: %s" % (s.alias)
+		    #print message
+		    utils.save_monitor(message, 0)
+		    
+	except:
+	    # если датчик не отвечает - увеличиваем поле errors заносим alarm
+	    utils.update_sensor_errors(s.address, 1) #sensor error! set+1 for sensor errors
+
+    message = u"опрос датчиков температуры завершен"
+    utils.save_monitor(message, 0)
+    
+#########################################################################
+
+# TODO: сделать возможно управлять поливом и освещением по месячно, динамично меняя через web сайт
+# тогда система будет каждую минуту будет проверять в базе на дату и время (можно ли это сделать)
+
+
 
 
 #########################################################################

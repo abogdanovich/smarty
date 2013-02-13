@@ -23,11 +23,17 @@ import utils
 
 def main(request):
 
-    message = ''
-    sensors = utils.get_sensors()
+    message = ""
+    sensors = utils.get_sensors(28)
+    
+    events = utils.get_monitor_events()
+    
+    alerts = utils.get_alert_events()
+    
+    temp_data = utils.get_temperature()
     
     
-    d = dict(request=request, message=message, sensors=sensors)
+    d = dict(request=request, message=message, sensors=sensors, events=events, alerts=alerts, temp_data=temp_data)
     return render_to_response('web/main.html', d, context_instance=RequestContext(request))
 
 #########################################################################
@@ -39,7 +45,7 @@ def sensors(request):
     
     if request.method == 'POST' and 'add_sensor' in request.POST:
         #save sensor
-        if utils.add_sensor(request.POST['sensor_address'], request.POST['sensor_alias']):        
+        if utils.add_sensor(request.POST['sensor_address'], request.POST['sensor_alias'], int(request.POST['sensor_family'])):        
             #d = dict(request=request, slist=slist, message=message)
             return redirect('/sensors/')
         else:
@@ -49,8 +55,9 @@ def sensors(request):
     
     
     try:
-        ow.init('localhost:4444')
+        ow.init(utils.owserver)
         sensors = ow.Sensor('/').sensorList()
+        
         for s in sensors:
             
             exist = utils.get_sensor(s.address)
@@ -62,13 +69,16 @@ def sensors(request):
                     slist.append({'address': s.address, 'family': s.family, 'temperature': s.temperature})
                 
             elif int(s.family) == 29:
-                slist.append({'address': s.address, 'family': s.family, 'PIO_ALL': s.PIO_ALL, 'alias': exist.alias})
+                if exist:
+                    slist.append({'address': s.address, 'family': s.family, 'PIO_ALL': s.PIO_ALL, 'alias': exist.alias})
+                else:
+                    slist.append({'address': s.address, 'family': s.family, 'PIO_ALL': s.PIO_ALL})
             
             else:
                 slist.append({'address': s.address, 'family': s.family})
    
     except:
-        message = 'OWFS problems'
+        message = 'OWserver error'
     
    
     
