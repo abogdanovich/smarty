@@ -15,21 +15,26 @@ class Sensor(models.Model): #all sensors
     alias = models.CharField(max_length=30) #10.12AB23431211 > we use WATER_OUTSIDE_1 for better usage
     active = models.IntegerField(default=0) # 1 - active (working right now), 0 - sleep state
     locked = models.IntegerField(default=0) # 1 locked (can't work) by smarty or human - critical errors, 0 - can work - no errors
+    errors = models.IntegerField(default=0) #count of errors | 2 errors - autoblock sensor + set alarm
+    family = models.IntegerField() #28 or 29, 28 - DS18B20| 29 - DS2408
+    
     def __unicode__(self):
         return self.address
     
 #temperature/humidity data sensors like DS18B20/HIH4000 read\write 
 class Temperature(models.Model): #Temperature/humidity sensors
     
-    sensor = models.IntegerField() #sensor db id
-    data = models.FloatField()
+    sensor = models.CharField(max_length=30) #10.12AB23431211
+    data = models.IntegerField() #temperature
+    date = models.IntegerField() #date int format
+    
     def __unicode__(self):
         return self.sensor    
     
 #switch sensors data like DS2408 read\write 
 class Controller(models.Model): #controller sensor
     
-    sensor = models.IntegerField() #sensor db id
+    sensor = models.CharField(max_length=30) #10.12AB23431211
     #POI_X usage and data storage 0 or 1
     pio_0 = models.IntegerField()
     pio_1 = models.IntegerField()
@@ -39,7 +44,9 @@ class Controller(models.Model): #controller sensor
     pio_5 = models.IntegerField()
     pio_6 = models.IntegerField()
     pio_7 = models.IntegerField()
-
+    
+    date = models.IntegerField() #date int format
+    
     def __unicode__(self):
         return self.sensor    
 

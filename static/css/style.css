@@ -5,10 +5,11 @@
 }
 
 body {
-	background:#BEC3C6;
-	color:#555;
+	background:#B3B3FF;
+	color:#1F1F1F;
 	font-family:Verdana,"BitStream vera Sans",Helvetica,Sans-serif;
 	font-size:12px;
+	padding: 10px;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-weight:bold;

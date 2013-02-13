@@ -3,10 +3,66 @@
 
 {% block main %}
 
-saved sensors <br/>
-{% for s in sensors %}
-	{{ s.id }} {{ s.alias}} {{ s.address }} <br/>
-{% endfor %}
+<br/>
+<h3>Зарегестрированные датчики в smarty</h3><br/>
+{% if sensors %}
+	
+	{% for s in sensors %}
+		{{ s.id }} {{ s.alias}} {{ s.address }} <br/>
+	{% endfor %}
+
+{% else %}
+
+нет регистрации датчиков
+	
+{% endif %}
+
+<br/>
+<h3>Монитор событий smarty</h3><br/>
+{% if events %}
+	
+	{% for e in events %}
+		#{{ forloop.counter }} action: {{ e.action }} | date: {{ e.date}} | status: {{ e.status }} <br/>
+	{% endfor %}
+
+{% else %}
+
+Нет событий в smarty	
+	
+{% endif %}
+
+
+
+<br/>
+<h3>Монитор критических событий smarty</h3><br/>
+{% if alerts %}
+	
+	{% for a in alerts %}
+		#{{ forloop.counter }} action: {{ a.sensor }} | date: {{ a.date}} | priority: {{ a.priority }} | alert message: {{ a.alert }}  <br/>
+	{% endfor %}
+
+{% else %}
+
+Нет событий в alerts smarty	
+	
+{% endif %}
+
+<br/>
+<h3>данные температуры</h3><br/>
+{% if temp_data %}
+	
+	{% for t in temp_data %}
+		#{{ forloop.counter }} sensor: {{ t.sensor }} | data: {{ t.data}} | date: {{ t.date }} <br/>
+	{% endfor %}
+
+{% else %}
+
+Нет данных по температуре
+	
+{% endif %}
+
+
+
 
 {% if message %}
 	<font color="blue">{{ message }}</font>
