@@ -25,7 +25,7 @@ class Sensor(models.Model): #all sensors
 class Temperature(models.Model): #Temperature/humidity sensors
     
     sensor = models.CharField(max_length=30) #10.12AB23431211
-    data = models.IntegerField() #temperature
+    data = models.FloatField() #temperature
     date = models.IntegerField() #date int format
     
     def __unicode__(self):

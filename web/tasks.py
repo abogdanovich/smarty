@@ -10,6 +10,7 @@
 from celery.task import periodic_task
 from celery.schedules import crontab
 import utils
+import ow
 
 #########################################################################
 
@@ -24,16 +25,16 @@ import utils
 def get_temperature():
     # берем все датчики и по очереди каждого опрашиваем
     sensors = utils.get_sensors(28) #get only 28 family type sensors
-    print  "датчики %s " % sensors
+
     #заносим в монитор события опроса
     message = u"программа получения температуры стратовала"
     utils.save_monitor(message, 0)
     
+    ow.init(utils.owserver)
+    
     for s in sensors:
 	try:
-	    ow.init(utils.owserver)
-	    s_temp = 0
-	    s_temp = ow.Sensor('/' + s.address).temperature
+	    s_temp = ow.Sensor(str('/' + s.address)).temperature
 	    # если было накопление error на сенсоре- обнуляем его в случае нормальной работы
 	    
 	    if s_temp:

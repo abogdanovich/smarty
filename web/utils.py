@@ -22,6 +22,7 @@ import pytz
 import pprint  
 import os
 import logging
+import ow
 #########################################################################
 
 #Global settings
@@ -125,19 +126,15 @@ def check_block_sensor(sensor_address):
     
 def save_temperature(sensor, data):
     
-    """
-    sensor = models.CharField(max_length=30) #10.12AB23431211
-    data = models.IntegerField() #temperature
-    date = models.IntegerField() #date int format
-    """
-    
     try:
         sensor = Temperature(sensor=sensor, data=data, date=get_unix_datetime())
         sensor.save()
+        print "saved data"
     except:
         sensor = []
 
     return sensor
+
 
 def get_temperature():
 
@@ -156,6 +153,8 @@ def get_alert_events():
     alerts = Alert.objects.all()
     
     return alerts
+
+
 
 
 """
