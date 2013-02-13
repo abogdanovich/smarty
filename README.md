@@ -51,7 +51,9 @@ Smarty Home System
 
 **PLANS**
 
-- 
+- web design
+- additional schemes \ loging description
+
 
 
 
