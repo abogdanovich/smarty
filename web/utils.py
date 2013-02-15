@@ -129,28 +129,50 @@ def save_temperature(sensor, data):
     try:
         sensor = Temperature(sensor=sensor, data=data, date=get_unix_datetime())
         sensor.save()
-        print "saved data"
+        print "saved temperature data"
     except:
         sensor = []
 
     return sensor
 
+def save_pio(sensor, data):
+    
+    try:
+        spio = data.split(",")
+        #spio_1 = spio[0:4] #канализация 1 (4 датчика)
+        #spio_2 = spio[4:8] #канализация 1 (4 датчика)
+
+        s = Controller(sensor=sensor, pio_0=spio[0], pio_1=spio[1], pio_2=spio[2], pio_3=spio[3], pio_4=spio[4], pio_5=spio[5], pio_6=spio[6], pio_7=spio[7], date=get_unix_datetime())
+        s.save()
+        print "saved PIO DATA"
+    except:
+        s = []
+
+    return s
+        
 
 def get_temperature():
 
-    temp_data = Temperature.objects.all()
+    temp_data = Temperature.objects.all().order_by('-date')[:10]
 
     return temp_data
 
+def get_piodata():
+
+    temp_data = Controller.objects.all().order_by('-date')[:10]
+
+    return temp_data
+
+
 def get_monitor_events():
     
-    events = Monitor.objects.all()
+    events = Monitor.objects.all().order_by('-date')[:10]
     
     return events
 
 def get_alert_events():
     
-    alerts = Alert.objects.all()
+    alerts = Alert.objects.all().order_by('-date')[:10]
     
     return alerts
 

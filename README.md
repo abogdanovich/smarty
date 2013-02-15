@@ -50,6 +50,8 @@ Smarty Home System
 - Electric Solenoid Valve For Water Air N/C 12V DC 1/2" Normally Closed (http://www.ebay.com/itm/130741056341?ssPageName=STRK:MEWAX:IT&_trksid=p3984.m1438.l2649)
 - DHT11 Digital Temperature and Humidity Sensor (http://www.ebay.com/itm/220785316232?ssPageName=STRK:MEWAX:IT&_trksid=p3984.m1438.l2649)
 - Electronic Flow Sensor Electronic Flow Meter 1-30L/M for solar water heater (http://www.ebay.com/itm/Electronic-Flow-Sensor-Electronic-Flow-Meter-1-30L-M-for-solar-water-heater-/261165339795?pt=LH_DefaultDomain_2&hash=item3cceaad493)
+- current transformer SCT-013-030 0-30A Non-invasive AC current sensor Split Core Current Transformer (http://www.ebay.com/itm/SCT-013-030-0-30A-Non-invasive-AC-current-sensor-Split-Core-Current-Transformer-/181072923128?pt=US_Relays_Sensors&hash=item2a28c989f8)
+
 
 **video monitoring**
 - usb video stream (need for zoneminder connection if usb is used) (http://sourceforge.net/projects/mjpg-streamer/)

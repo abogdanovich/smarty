@@ -22,7 +22,7 @@
 {% if events %}
 	
 	{% for e in events %}
-		#{{ forloop.counter }} action: {{ e.action }} | date: {{ e.date}} | status: {{ e.status }} <br/>
+		- action: {{ e.action }} | date: {{ e.date}} | status: {{ e.status }} <br/>
 	{% endfor %}
 
 {% else %}
@@ -38,7 +38,7 @@
 {% if alerts %}
 	
 	{% for a in alerts %}
-		#{{ forloop.counter }} action: {{ a.sensor }} | date: {{ a.date}} | priority: {{ a.priority }} | alert message: {{ a.alert }}  <br/>
+		- action: {{ a.sensor }} | date: {{ a.date}} | priority: {{ a.priority }} | alert message: {{ a.alert }}  <br/>
 	{% endfor %}
 
 {% else %}
@@ -52,7 +52,7 @@
 {% if temp_data %}
 	
 	{% for t in temp_data %}
-		#{{ forloop.counter }} sensor: {{ t.sensor }} | data: {{ t.data}} | date: {{ t.date }} <br/>
+		- sensor: {{ t.sensor }} | data: {{ t.data}} | date: {{ t.date }} <br/>
 	{% endfor %}
 
 {% else %}
@@ -60,6 +60,33 @@
 Нет данных по температуре
 	
 {% endif %}
+
+
+
+
+<br/>
+<h3>данные PIO</h3><br/>
+{% if temp_data2 %}
+	
+	{% for t in temp_data2 %}
+		- sensor: {{ t.sensor }}
+		| pio0: {{ t.pio_0}}
+		| pio1: {{ t.pio_1}}
+		| pio2: {{ t.pio_2}}
+		| pio3: {{ t.pio_3}}
+		| pio4: {{ t.pio_4}}
+		| pio5: {{ t.pio_5}}
+		| pio6: {{ t.pio_6}}
+		| pio7: {{ t.pio_7}}
+		| date: {{ t.date }} <br/>
+	{% endfor %}
+
+{% else %}
+
+Нет данных по PIO
+	
+{% endif %}
+
 
 
 

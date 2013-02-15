@@ -21,7 +21,7 @@ import ow
 #########################################################################
 # for test - опрос каждую минуту
 
-@periodic_task(ignore_result=True, run_every=crontab(hour="*", minute="*/1", day_of_week="*"))
+@periodic_task(ignore_result=True, run_every=crontab(hour="*", minute="*/5", day_of_week="*"))
 def get_temperature():
     # берем все датчики и по очереди каждого опрашиваем
     sensors = utils.get_sensors(28) #get only 28 family type sensors
@@ -68,6 +68,44 @@ def get_temperature():
 # period = всегда каждые 5 минут
 # сохранение данных в зависимости от полученных данных, если изменилось
 # состояние от предыдущего - 1 положение = 25% заполнение ёмкости  
+@periodic_task(ignore_result=True, run_every=crontab(hour="*", minute="*/5", day_of_week="*"))
+def get_sewage():
+    # берем все датчики и по очереди каждого опрашиваем
+    sensor = utils.get_sensor(str('293EA141E1FC6712')) #get only 28 family type sensors
+
+    #заносим в монитор события опроса
+    message = u"программа получения уровня канализации стратовала"
+    utils.save_monitor(message, 0)
+    
+    ow.init(utils.owserver)
+    
+    try:
+	print sensor.address
+	data = ow.Sensor(str('/' + sensor.address)).PIO_ALL
+	#print s_sewage
+	
+	# если было накопление error на сенсоре- обнуляем его в случае нормальной работы
+	
+	if data:
+	    if utils.save_pio(sensor.address, data):
+		message = u"сохранения данных датчика: %s" % (sensor.alias)
+		#print message
+		utils.save_monitor(message, 0)
+	    else:
+		message = u"ошибка сохранения данных датчика: %s" % (sensor.alias)
+		#print message
+		utils.save_monitor(message, 0)
+		
+    except:
+	# если датчик не отвечает - увеличиваем поле errors заносим alarm
+	utils.update_sensor_errors(sensor.address, 1) #sensor error! set+1 for sensor errors
+
+    message = u"программа получения уровня канализации ЗАВЕРШЕНА"
+    utils.save_monitor(message, 0)
+
+
+
+
 #########################################################################
 
 #########################################################################
