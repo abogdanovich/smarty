@@ -60,7 +60,10 @@ def get_sensor(sensor_address):
 #get sensor object
 def get_sensors(family):
     
-    sensors = Sensor.objects.all().filter(family=int(family)) #TODO: change active=1
+    if family == 'all':
+        sensors = Sensor.objects.all()
+    else:
+        sensors = Sensor.objects.all().filter(family=int(family)) #TODO: change active=1
     
     return sensors
 
@@ -153,26 +156,48 @@ def save_pio(sensor, data):
 
 def get_temperature():
 
-    temp_data = Temperature.objects.all().order_by('-date')[:10]
+    sensors = Sensor.objects.all().filter(family=28)
+    temp_data = []
+    
+    for s in sensors:
+        sensor_data = Temperature.objects.filter(sensor=s.address).order_by('-date')[:1]
+        #print sensor_data
+        date = convert_unix_date('all', sensor_data[0].date)
+        temp_data.append({'sensor': s.alias, 'date': date, 'data': sensor_data[0].data})
 
     return temp_data
 
 def get_piodata():
 
-    temp_data = Controller.objects.all().order_by('-date')[:10]
+    sensors = Sensor.objects.all().filter(family=29)
+    temp_data = []
+    
+    for s in sensors:
+        sensor_data = Controller.objects.filter(sensor=s.address).order_by('-date')[:1]
+        #print sensor_data
+        date = convert_unix_date('all', sensor_data[0].date)
+        temp_data.append({'sensor': s.alias, 'date': date, 'pio_0': sensor_data[0].pio_0, 'pio_1': sensor_data[0].pio_1, 'pio_2': sensor_data[0].pio_2, 'pio_3': sensor_data[0].pio_3, 'pio_4': sensor_data[0].pio_4, 'pio_5': sensor_data[0].pio_5, 'pio_6': sensor_data[0].pio_6, 'pio_7': sensor_data[0].pio_7})
 
     return temp_data
 
 
 def get_monitor_events():
     
-    events = Monitor.objects.all().order_by('-date')[:10]
+    e = Monitor.objects.all().order_by('-date')[:10]
+    events = []
+    for event in e:
+        date = convert_unix_date('all', event.date)
+        events.append({'action': event.action, 'date': date, 'status': event.status})
     
     return events
 
 def get_alert_events():
     
-    alerts = Alert.objects.all().order_by('-date')[:10]
+    a = Alert.objects.all().order_by('-date')[:10]
+    alerts = []
+    for alert in a:
+        date = convert_unix_date('all', alert.date)
+        alerts.append({'sensor': alert.sensor, 'date': date, 'priority': alert.priority, 'alert': alert.alert})
     
     return alerts
 
@@ -274,9 +299,6 @@ def convert_unix_date(sel, timestamp):
     elif sel == 'time':
         dt_obj = datetime.datetime.fromtimestamp(timestamp)
         return pytz.timezone(TIMEZONE).fromutc(dt_obj).strftime("%H:%M")
-    elif sel == 'stattime':
-        dt_obj = datetime.datetime.fromtimestamp(timestamp)
-        return pytz.timezone(TIMEZONE).fromutc(dt_obj).strftime("%H")
     else:
         dt_obj = datetime.datetime.fromtimestamp(timestamp)
         return pytz.timezone(TIMEZONE).fromutc(dt_obj).strftime("%Y-%m-%d %H:%M")

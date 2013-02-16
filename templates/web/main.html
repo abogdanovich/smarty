@@ -8,7 +8,7 @@
 {% if sensors %}
 	
 	{% for s in sensors %}
-		{{ s.id }} {{ s.alias}} {{ s.address }} <br/>
+		{{ s.id }} {{ s.alias}} ({{ s.address }}) <br/>
 	{% endfor %}
 
 {% else %}
@@ -22,7 +22,12 @@
 {% if events %}
 	
 	{% for e in events %}
-		- action: {{ e.action }} | date: {{ e.date}} | status: {{ e.status }} <br/>
+		{% if e.status == 0 %}
+			<font color="black"><i>{{ e.date}}</i> {{ e.action }}</font><br/>
+		{% else %}
+			<font color="red"><i>{{ e.date}}</i> {{ e.action }} (alert id: {{ e.status }}) </font><br/>
+		{% endif %}
+		
 	{% endfor %}
 
 {% else %}
@@ -38,7 +43,7 @@
 {% if alerts %}
 	
 	{% for a in alerts %}
-		- action: {{ a.sensor }} | date: {{ a.date}} | priority: {{ a.priority }} | alert message: {{ a.alert }}  <br/>
+		<i>{{ a.date}}</i> <b>{{ a.sensor }}</b>: {{ a.alert }} (P{{ a.priority }})  <br/>
 	{% endfor %}
 
 {% else %}
@@ -52,7 +57,18 @@
 {% if temp_data %}
 	
 	{% for t in temp_data %}
-		- sensor: {{ t.sensor }} | data: {{ t.data}} | date: {{ t.date }} <br/>
+		{% if t.data < 19 %}
+			<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="blue">{{ t.data}}</font> <br/>
+		{% else %}
+			{% if t.data > 19 and t.data < 25 %}
+				<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="black">{{ t.data}}</font> <br/>
+			{% else %}
+				<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="red">{{ t.data}}</font> <br/>
+			{% endif %}
+		{% endif %}
+		
+		
+		
 	{% endfor %}
 
 {% else %}
@@ -69,7 +85,7 @@
 {% if temp_data2 %}
 	
 	{% for t in temp_data2 %}
-		- sensor: {{ t.sensor }}
+		<i>{{ t.date }}</i> <b>{{ t.sensor }}</b>
 		| pio0: {{ t.pio_0}}
 		| pio1: {{ t.pio_1}}
 		| pio2: {{ t.pio_2}}
@@ -77,8 +93,7 @@
 		| pio4: {{ t.pio_4}}
 		| pio5: {{ t.pio_5}}
 		| pio6: {{ t.pio_6}}
-		| pio7: {{ t.pio_7}}
-		| date: {{ t.date }} <br/>
+		| pio7: {{ t.pio_7}}<br/>
 	{% endfor %}
 
 {% else %}

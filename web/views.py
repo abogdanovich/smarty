@@ -24,7 +24,7 @@ import utils
 def main(request):
 
     message = ""
-    sensors = utils.get_sensors(28)
+    sensors = utils.get_sensors('all')
     
     events = utils.get_monitor_events()
     
