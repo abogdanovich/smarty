@@ -162,8 +162,13 @@ def get_temperature():
     for s in sensors:
         sensor_data = Temperature.objects.filter(sensor=s.address).order_by('-date')[:1]
         #print sensor_data
-        date = convert_unix_date('all', sensor_data[0].date)
-        temp_data.append({'sensor': s.alias, 'date': date, 'data': sensor_data[0].data})
+        if sensor_data:
+            date = convert_unix_date('all', sensor_data[0].date)
+            temp_data.append({'sensor': s.alias, 'date': date, 'data': sensor_data[0].data})
+        else:
+            #date = convert_unix_date('all', sensor_data[0].date)
+            temp_data.append({'sensor': s.alias, 'date': 0, 'data': 0})
+            
 
     return temp_data
 
@@ -175,8 +180,11 @@ def get_piodata():
     for s in sensors:
         sensor_data = Controller.objects.filter(sensor=s.address).order_by('-date')[:1]
         #print sensor_data
-        date = convert_unix_date('all', sensor_data[0].date)
-        temp_data.append({'sensor': s.alias, 'date': date, 'pio_0': sensor_data[0].pio_0, 'pio_1': sensor_data[0].pio_1, 'pio_2': sensor_data[0].pio_2, 'pio_3': sensor_data[0].pio_3, 'pio_4': sensor_data[0].pio_4, 'pio_5': sensor_data[0].pio_5, 'pio_6': sensor_data[0].pio_6, 'pio_7': sensor_data[0].pio_7})
+        if sensor_data:
+            date = convert_unix_date('all', sensor_data[0].date)
+            temp_data.append({'sensor': s.alias, 'date': date, 'pio_0': sensor_data[0].pio_0, 'pio_1': sensor_data[0].pio_1, 'pio_2': sensor_data[0].pio_2, 'pio_3': sensor_data[0].pio_3, 'pio_4': sensor_data[0].pio_4, 'pio_5': sensor_data[0].pio_5, 'pio_6': sensor_data[0].pio_6, 'pio_7': sensor_data[0].pio_7})
+        else:
+            temp_data.append({'sensor': s.alias, 'date': 0, 'pio_0': 0, 'pio_1': 0, 'pio_2': 0, 'pio_3': 0, 'pio_4': 0, 'pio_5': 0, 'pio_6': 0, 'pio_7': 0})
 
     return temp_data
 
