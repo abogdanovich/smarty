@@ -100,6 +100,9 @@ def video(request):
 def settings(request):
 
     message = ''
+    utils.draw_timeline('poliv')
+    utils.draw_timeline('svet')
+    
     d = dict(request=request, message=message)
     return render_to_response('web/settings.html', d, context_instance=RequestContext(request))
 

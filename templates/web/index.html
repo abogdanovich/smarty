@@ -11,6 +11,7 @@
 <!-- css section -->
 
 <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 <!--
 <link href="{{ STATIC_URL }}css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 -->
@@ -20,7 +21,52 @@
 
 
 <script src="{{ STATIC_URL }}js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 
+ <script>
+  $(function() {
+    $("#c_from_water").datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      dateFormat: "mm/dd",
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $("#c_to_water").datepicker("option", "minDate", selectedDate);
+      }
+    });
+    $("#c_to_water").datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      dateFormat: "mm/dd",
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $("#c_from_water").datepicker("option", "maxDate", selectedDate);
+      }
+    });
+    
+    
+    $("#c_from_svet").datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      dateFormat: "mm/dd",
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $("#c_to_svet").datepicker("option", "minDate", selectedDate);
+      }
+    });
+    $("#c_to_svet").datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      dateFormat: "mm/dd",
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $("#c_from_svet").datepicker("option", "maxDate", selectedDate);
+      }
+    });
+    
+  });
+  </script>
+ 
 <!-- end js section -->
 
 </head>

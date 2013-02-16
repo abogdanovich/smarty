@@ -1,9 +1,62 @@
 {% extends "web/index.html" %}
+
 {% block page_title %}<h3>Настройки</h3>{% endblock %}
 
 {% block settings %}
 
+<br/>
 
+<table border="0" width="100%">
+<tr>
+<td>
+<h3>График полива газона</h3>
+</td>
+
+
+<td>
+
+<form action="/settings/" method="post">
+{% csrf_token %}
+<label for="c_from_water">From</label>
+<input type="text" id="c_from_water" name="c_from_water" />
+<label for="c_to_water">to</label>
+<input type="text" id="c_to_water" name="c_to_water" />
+<br/>
+<input type="button" name="save_water_settings" value="сохранить автополив">
+</form>
+
+</td>
+
+<td><img src="{{ MEDIA_URL }}timelinepoliv.jpg"></td>
+
+</tr>
+
+<tr>
+<td>
+<h3>График освещения участка</h3>
+</td>
+
+
+<td>
+
+<form action="/settings/" method="post">
+{% csrf_token %}
+<label for="c_from_svet">From</label>
+<input type="text" id="c_from_svet" name="c_from_svet" />
+<label for="c_to_svet">to</label>
+<input type="text" id="c_to_svet" name="c_to_svet" />
+<br/>
+<input type="button" name="save_light_settings" value="сохранить автоосвещение">
+</form>
+
+</td>
+
+<td><img src="{{ MEDIA_URL }}timelinesvet.jpg"></td>
+
+</tr>
+
+
+</table>
 
 {% if message %}
 	<font color="blue">{{ message }}</font>

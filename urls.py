@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     
     url(r'^', include('web.urls')),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.PROJECT_ROOT+'/static'}),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.PROJECT_ROOT+'/media'}),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
