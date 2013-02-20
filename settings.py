@@ -8,7 +8,7 @@
 
 import os, sys
 import socket
-import logging
+#import logging
 import djcelery
 import pytz
 
@@ -19,7 +19,7 @@ hostname = socket.gethostname()
 PROJECT_ROOT= os.path.realpath(os.path.dirname(__file__))
 
 #loging    
-logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+')
+#logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+')
 
 
 DEBUG = True

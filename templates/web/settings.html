@@ -1,19 +1,31 @@
 {% extends "web/index.html" %}
 
-{% block page_title %}<h3>Настройки</h3>{% endblock %}
-
 {% block settings %}
 
 <br/>
 
-<table border="0" width="100%">
+<table width="100%" border="0" cellpadding="2" cellspacing="5">
+
 <tr>
-<td>
-<h3>График полива газона</h3>
+<td width="25%">
+<b>График полива газона</b>
+
+{% if controllers %}
+	<select>
+	
+	{% for c in controlles %}
+		<option value="{{ c.address }}">{{ c.alias }}</option>
+		
+	{% endfor %}
+	
+	</select>
+
+{% endif %}
+
 </td>
 
 
-<td>
+<td align="right" width="40%">
 
 <form action="/settings/" method="post">
 {% csrf_token %}
@@ -21,39 +33,75 @@
 <input type="text" id="c_from_water" name="c_from_water" />
 <label for="c_to_water">to</label>
 <input type="text" id="c_to_water" name="c_to_water" />
+
+<br/><br/>
+Время полива<br/>
+<input type="text" id="c_from_water_time" name="c_from_water_time" value="00:00"/>
+<input type="text" id="c_to_water_time" name="c_to_water_time" value="02:00"/>
+<br/>
+<label for="c_check_raind_days">Количество дней после дождя</label>
+<input type="text" id="c_check_raind_days" name="c_check_raind_days" value="2"/>
+
+<br/>
 <br/>
 <input type="button" name="save_water_settings" value="сохранить автополив">
+<br/><br/>
 </form>
 
 </td>
 
-<td><img src="{{ MEDIA_URL }}timelinepoliv.jpg"></td>
+<td align="center"><img src="{{ MEDIA_URL }}timelinepoliv.jpg"></td>
 
 </tr>
 
 <tr>
 <td>
-<h3>График освещения участка</h3>
+<b>График освещения участка</b>
+{% if controllers %}
+	<select>
+	
+	{% for c in controlles %}
+		<option value="{{ c.address }}">{{ c.alias }}</option>
+		
+	{% endfor %}
+	
+	</select>
+
+{% endif %}
 </td>
 
 
-<td>
+<td align="right">
 
 <form action="/settings/" method="post">
 {% csrf_token %}
 <label for="c_from_svet">From</label>
 <input type="text" id="c_from_svet" name="c_from_svet" />
+
 <label for="c_to_svet">to</label>
 <input type="text" id="c_to_svet" name="c_to_svet" />
 <br/>
+<br/>
+Время влючения света
+<br/>
+<input type="text" id="c_from_svet_time" name="c_from_svet_time" value="00:00"/>
+<input type="text" id="c_to_svet_time" name="c_to_svet_time" value="02:00"/>
+<br/>
+<br/>
+<label for="c_check_light_sensor">Учитывать датчика освещения?</label>
+<input type="checkbox" id="c_check_light_sensor" name="c_check_light_sensor" />
+<br/>
+<br/>
 <input type="button" name="save_light_settings" value="сохранить автоосвещение">
+<br/><br/>
 </form>
 
 </td>
 
-<td><img src="{{ MEDIA_URL }}timelinesvet.jpg"></td>
+<td align="center"><img src="{{ MEDIA_URL }}timelinesvet.jpg"></td>
 
 </tr>
+
 
 
 </table>

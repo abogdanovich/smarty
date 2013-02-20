@@ -1,108 +1,212 @@
 {% extends "web/index.html" %}
-{% block page_title %}<h3>Система</h3>{% endblock %}
 
 {% block main %}
 
-<br/>
-<h3>Зарегестрированные датчики в smarty</h3><br/>
-{% if sensors %}
-	
-	{% for s in sensors %}
-		{{ s.id }} {{ s.alias}} ({{ s.address }}) <br/>
-	{% endfor %}
+<!-- BLOCK start -->
 
-{% else %}
-
-нет регистрации датчиков
-	
-{% endif %}
-
-<br/>
-<h3>Монитор событий smarty</h3><br/>
-{% if events %}
-	
-	{% for e in events %}
-		{% if e.status == 0 %}
-			<font color="black"><i>{{ e.date}}</i> {{ e.action }}</font><br/>
-		{% else %}
-			<font color="red"><i>{{ e.date}}</i> {{ e.action }} (alert id: {{ e.status }}) </font><br/>
-		{% endif %}
+<div id="block1">
 		
-	{% endfor %}
-
-{% else %}
-
-Нет событий в smarty	
-	
-{% endif %}
-
-
-
-<br/>
-<h3>Монитор критических событий smarty</h3><br/>
-{% if alerts %}
-	
-	{% for a in alerts %}
-		<i>{{ a.date}}</i> <b>{{ a.sensor }}</b>: {{ a.alert }} (P{{ a.priority }})  <br/>
-	{% endfor %}
-
-{% else %}
-
-Нет событий в alerts smarty	
-	
-{% endif %}
-
-<br/>
-<h3>данные температуры</h3><br/>
-{% if temp_data %}
-	
-	{% for t in temp_data %}
-		{% if t.data < 19 %}
-			<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="blue">{{ t.data}}</font> <br/>
-		{% else %}
-			{% if t.data > 19 and t.data < 25 %}
-				<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="black">{{ t.data}}</font> <br/>
+	<div class="internal_block">
+		
+		<div class="block_caption">
+			Монитор событий smarty
+		</div>
+		
+		<div class="block_data">
+			{% if events %}
+		
+				{% for e in events %}
+					{% if e.status == 0 %}
+						<font color="black"><i>{{ e.date}}</i> {{ e.action }}</font><br/>
+					{% else %}
+						<font color="red"><i>{{ e.date}}</i> {{ e.action }} (alert id: {{ e.status }}) </font><br/>
+					{% endif %}
+					
+				{% endfor %}
+			
 			{% else %}
-				<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="red">{{ t.data}}</font> <br/>
+			
+			Нет событий в smarty	
+				
 			{% endif %}
-		{% endif %}
+		</div>
+		
+		
+	
+	
+	</div>
+	
+	<div class="internal_block">
+		<div class="block_caption">
+			Монитор критических событий smarty
+		</div>
+		
+		<div class="block_data">
+			{% if alerts %}
+	
+				{% for a in alerts %}
+					<i>{{ a.date}}</i> <b>{{ a.sensor }}</b>: {{ a.alert }} (P{{ a.priority }})  <br/>
+				{% endfor %}
+			
+			{% else %}
+			
+			Нет событий в alerts smarty	
+				
+			{% endif %}
+		</div>
+	</div>
+	
+	
+</div>
+
+<!-- BLOCK start -->
+
+<div id="block2">
+	
+	<div class="internal_block">
+		
+		<div class="block_caption">
+			Состояние дома
+		</div>
+		
+		<div class="block_data">
+			
+			<img src="http://img6.imageshack.us/img6/8089/screenshotern.png" width="40%"/>
+			<img src="http://img577.imageshack.us/img577/2283/screenshotnwk.png" width="40%"/>
+			<br/>
+			{% if temp_data %}
+			
+				{% for t in temp_data %}
+					{% if t.data < 19 %}
+						<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="blue">{{ t.data}}</font> <br/>
+					{% else %}
+						{% if t.data > 19 and t.data < 25 %}
+							<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="black">{{ t.data}}</font> <br/>
+						{% else %}
+							<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="red">{{ t.data}}</font> <br/>
+						{% endif %}
+					{% endif %}
+					
+					
+					
+				{% endfor %}
+			
+			{% else %}
+			
+			Нет данных по температуре
+				
+			{% endif %}
+		</div>
+		
+		
+		<div class="block_caption">
+			Канализация
+		</div>
+		
+		<div class="block_data">
+			<img src="{{ STATIC_URL }}images/sewage_.png"/> <br/>
+			{% if temp_data2 %}
+	
+				{% for t in temp_data2 %}
+					<i>{{ t.date }}</i> <b>{{ t.sensor }}</b>
+					| pio0: {{ t.pio_0}}
+					| pio1: {{ t.pio_1}}
+					| pio2: {{ t.pio_2}}
+					| pio3: {{ t.pio_3}}
+					| pio4: {{ t.pio_4}}
+					| pio5: {{ t.pio_5}}
+					| pio6: {{ t.pio_6}}
+					| pio7: {{ t.pio_7}}<br/>
+				{% endfor %}
+			
+			{% else %}
+			
+			Нет данных по PIO
+				
+			{% endif %}
+		</div>
 		
 		
 		
-	{% endfor %}
-
-{% else %}
-
-Нет данных по температуре
+		
+		
+	</div>
 	
-{% endif %}
-
-
-
-
-<br/>
-<h3>данные PIO</h3><br/>
-{% if temp_data2 %}
 	
-	{% for t in temp_data2 %}
-		<i>{{ t.date }}</i> <b>{{ t.sensor }}</b>
-		| pio0: {{ t.pio_0}}
-		| pio1: {{ t.pio_1}}
-		| pio2: {{ t.pio_2}}
-		| pio3: {{ t.pio_3}}
-		| pio4: {{ t.pio_4}}
-		| pio5: {{ t.pio_5}}
-		| pio6: {{ t.pio_6}}
-		| pio7: {{ t.pio_7}}<br/>
-	{% endfor %}
-
-{% else %}
-
-Нет данных по PIO
+	<div class="internal_block">
+		<div class="block_caption">
+			Полив газона
+		</div>
+		
+		<div class="block_data">
+			картинка
+		</div>
+		
+		<div class="block_caption">
+			Освещение участка
+		</div>
+		
+		<div class="block_data">
+			картинка
+		</div>
+		
+		<div class="block_caption">
+			Видео камеры
+		</div>
+		
+		<div class="block_data">
+			камеры....
+		</div>
+	</div>
 	
-{% endif %}
+</div>
 
+<!-- BLOCK start -->
 
+<div id="block3">
+	
+	<div class="internal_block">
+		<div class="block_caption">
+			Прогноз погоды
+		</div>
+		
+		<div class="block_data">
+			
+			<!--pogoda.by-->
+			<!--Информер распространяется свободно и на безвозмездной основе. Однако, в случае изменения кода информера (в частности, удаления ссылок), POGODA.BY снимает с себя ответственность за конечный результат.-->
+			
+			<table width="270" height="180" style="background-color:#FFFFFF; font-family:Tahoma; font-size:12px; color:#000000;" cellpadding="2" cellspacing="0">
+			<tr><td><a href="http://6.pogoda.by/26850" style="font-family:Tahoma; font-size:12px; color:#003399;" title="Погода Минск на 6 дней - Гидрометцентр РБ" target="_blank">Погода Минск</a>
+			</td></tr>
+			<tr><td>
+			
+			<table width=100% height=100% style="background-color:#FFFFFF; font-family:Tahoma; font-size:12px; color:#000000;" cellpadding="0" cellspacing="0">
+			<tr><td>
+			<script type="text/javascript" charset="windows-1251" src="http://pogoda.by/meteoinformer/js/26850_3.js"></script>
+			</td></tr>
+			</table>
+			
+			</td></tr>
+			
+			
+			</table>
+			
+		</div>
+	</div>
+	
+	<div class="internal_block">
+		<div class="block_caption">
+			Фаза луны
+		</div>
+		
+		<div class="block_data">
+			<iframe src=http://www.astrolab.ru/cgi-bin/informer/informer.cgi?type=33 frameborder=0 vspace=0 hspace=0 width=100 height=100 marginwidth=0 marginheight=0 scrolling=no></iframe>
+		</div>
+	</div>
+	
+	
+	
+</div>
 
 
 

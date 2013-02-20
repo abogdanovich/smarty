@@ -21,7 +21,7 @@ import ow
 #########################################################################
 # for test - опрос каждую минуту
 
-@periodic_task(ignore_result=True, run_every=crontab(hour="*", minute="*/5", day_of_week="*"))
+@periodic_task(ignore_result=True, run_every=crontab(hour="*", minute="*/1", day_of_week="*"))
 def get_temperature():
     # берем все датчики и по очереди каждого опрашиваем
     sensors = utils.get_sensors(28) #get only 28 family type sensors

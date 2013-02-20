@@ -59,6 +59,9 @@ Smarty Home System
 - mjpg-streamer cmd: sudo mjpg_streamer -i "input_uvc.so -r 320x240 -d /dev/video0 -f 30 -y -n" -o "output_http.so -p 8090"
 - zoneminder (how to install: http://cleaner-lab.blogspot.com/2010/05/ubuntu-1004.html)
 
+**NOOLIGHT**
+- noolight controllers (http://habrahabr.ru/company/boxowerview/blog/168039/ http://www.noo.com.by/produkciya.html)
+
 **PLANS**
 
 - web design

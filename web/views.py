@@ -24,7 +24,6 @@ import utils
 def main(request):
 
     message = ""
-    sensors = utils.get_sensors('all')
     
     events = utils.get_monitor_events()
     
@@ -35,7 +34,7 @@ def main(request):
     temp_data2 = utils.get_piodata()
     
     
-    d = dict(request=request, message=message, sensors=sensors, events=events, alerts=alerts, temp_data=temp_data, temp_data2=temp_data2)
+    d = dict(request=request, message=message, events=events, alerts=alerts, temp_data=temp_data, temp_data2=temp_data2)
     return render_to_response('web/main.html', d, context_instance=RequestContext(request))
 
 #########################################################################
@@ -103,7 +102,9 @@ def settings(request):
     utils.draw_timeline('poliv')
     utils.draw_timeline('svet')
     
-    d = dict(request=request, message=message)
+    controllers = utils.get_sensors(29) #controllers
+    
+    d = dict(request=request, message=message, controllers=controllers)
     return render_to_response('web/settings.html', d, context_instance=RequestContext(request))
 
 #########################################################################

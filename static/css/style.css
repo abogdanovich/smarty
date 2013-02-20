@@ -8,11 +8,63 @@ body {
 	background:#FFFFFF;
 	color:#1F1F1F;
 	font-family:Verdana,"BitStream vera Sans",Helvetica,Sans-serif;
-	font-size:12px;
-	padding: 10px;
+	font-size:11px;
+	padding: 5px;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-weight:bold;
 	letter-spacing:-0.05em;
 	font-family:Arial;
+}
+
+#block1 {
+	position: absolute;
+	border: 1px dashed;
+	height: 100%;
+	width: 20%;
+	top: 50px;
+	left: 5px;
+}
+
+#block2 {
+	position: absolute;
+	border: 1px dashed;
+	height: 100%;
+	width: 58%;
+	top: 50px;
+	left: 21%;
+}
+
+#block3 {
+	position: absolute;
+	border: 1px dashed;
+	height: 100%;
+	width: 20%;
+	top: 50px;
+	right: 5px;
+}
+
+.internal_block {
+	position: rerelative;
+	width: 100%;
+	
+}
+.block_caption {
+	position: relative;
+	width: 100%;
+	height: 20px;
+	background:#1F1F1F;
+	color:#FFFFFF;
+	font-family:Verdana,"BitStream vera Sans",Helvetica,Sans-serif;
+	font-size:10px;
+}
+
+.block_data {
+	position: relative;
+	width: 100%;
+	background:#FFFFFF;
+	color:#1F1F1F;
+	font-family:Verdana,"BitStream vera Sans",Helvetica,Sans-serif;
+	font-size:10px;
+	padding: 3px;
 }

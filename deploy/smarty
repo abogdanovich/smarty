@@ -1,0 +1,22 @@
+<VirtualHost 127.0.1.2:80>
+  # Описание сервера
+   ServerAdmin bogdanovich.alex@gmail.com
+   ServerName smarty
+
+   # Логи
+   ErrorLog /home/alex/django/smarty/logs/error_log
+   CustomLog /home/alex/django/smarty/logs/access_log common
+
+   # wsgi-обработчик (см. ниже)
+   WSGIScriptAlias / /home/alex/django/smarty/deploy/django.wsgi
+   # Параметры запуска wsgi (myuser — ник пользователя с доступом)
+   WSGIDaemonProcess myuser-site user=myuser group= myuser home=/home/alex/django/smarty/web/	 \ 
+   processes=2 threads=4 maximum-requests=100 display-name=apache-myuser-wsgi
+   WSGIProcessGroup myuser-site
+
+   # Статические файлы проекта
+   Alias "/static/" "/home/alex/django/smarty/static/"
+   <Location "/public/static/">
+      SetHandler None
+   </Location>
+</VirtualHost>
