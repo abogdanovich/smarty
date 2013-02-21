@@ -31,10 +31,10 @@ def main(request):
     
     temp_data = utils.get_temperature()
     
-    temp_data2 = utils.get_piodata()
+    #temp_data2 = utils.get_piodata()
     
     
-    d = dict(request=request, message=message, events=events, alerts=alerts, temp_data=temp_data, temp_data2=temp_data2)
+    d = dict(request=request, message=message, events=events, alerts=alerts, temp_data=temp_data)
     return render_to_response('web/main.html', d, context_instance=RequestContext(request))
 
 #########################################################################
@@ -43,6 +43,7 @@ def sensors(request):
 
     slist = []
     message = ''
+    sensors = []
     
     if request.method == 'POST' and 'add_sensor' in request.POST:
         #save sensor
@@ -99,8 +100,8 @@ def video(request):
 def settings(request):
 
     message = ''
-    utils.draw_timeline('poliv')
-    utils.draw_timeline('svet')
+    #utils.draw_timeline('poliv')
+    #utils.draw_timeline('svet')
     
     controllers = utils.get_sensors(29) #controllers
     

@@ -9,7 +9,22 @@
 	<div class="internal_block">
 		
 		<div class="block_caption">
-			Монитор событий smarty
+			◌ Камеры наблюдения
+		</div>
+		
+		<div class="block_data">
+		
+			Cam-3 - Улица<br/>
+			<img src="{{STATIC_URL}}images/cam3.jpg" width="70%"/><br/><br/>
+			
+			Cam-4 - Улица<br/>
+			<img src="{{STATIC_URL}}images/cam4.jpg" width="70%"/><br/><br/>
+		
+		</div>
+		
+		
+		<div class="block_caption">
+			◌ Монитор событий smarty
 		</div>
 		
 		<div class="block_data">
@@ -17,9 +32,9 @@
 		
 				{% for e in events %}
 					{% if e.status == 0 %}
-						<font color="black"><i>{{ e.date}}</i> {{ e.action }}</font><br/>
+						<font color="black"><i>{{ e.date}}</i> <br/>{{ e.action }}</font><br/>
 					{% else %}
-						<font color="red"><i>{{ e.date}}</i> {{ e.action }} (alert id: {{ e.status }}) </font><br/>
+						<font color="red"><i>{{ e.date}}</i> <br/>{{ e.action }} (alert id: {{ e.status }}) </font><br/>
 					{% endif %}
 					
 				{% endfor %}
@@ -38,7 +53,7 @@
 	
 	<div class="internal_block">
 		<div class="block_caption">
-			Монитор критических событий smarty
+			◌ Монитор критических событий smarty
 		</div>
 		
 		<div class="block_data">
@@ -66,31 +81,41 @@
 	<div class="internal_block">
 		
 		<div class="block_caption">
-			Состояние дома
+			◌ Состояние дома: температура, освещение
 		</div>
 		
 		<div class="block_data">
-			
-			<img src="http://img6.imageshack.us/img6/8089/screenshotern.png" width="40%"/>
-			<img src="http://img577.imageshack.us/img577/2283/screenshotnwk.png" width="40%"/>
+			<br/>
+			<img src="{{STATIC_URL}}images/home-model2013_1floor.png" width="38%"/>
+			<img src="{{STATIC_URL}}images/home-model2013_2floor.png" width="40%"/>
 			<br/>
 			{% if temp_data %}
 			
 				{% for t in temp_data %}
+					<div style="position: absolute; left: {{ t.data }}px; top: {{ t.data }}px;">
 					{% if t.data < 19 %}
 						<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="blue">{{ t.data}}</font> <br/>
 					{% else %}
 						{% if t.data > 19 and t.data < 25 %}
-							<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="black">{{ t.data}}</font> <br/>
+							<b>{{ t.sensor }}</b> :<font color="black">{{ t.data}}</font> <br/>
 						{% else %}
-							<i>{{ t.date}}</i> <b>{{ t.sensor }}</b> :<font color="red">{{ t.data}}</font> <br/>
+							<b>{{ t.sensor }}</b> :<font color="red">{{ t.data}}</font> <br/>
 						{% endif %}
 					{% endif %}
-					
-					
+					</div>
 					
 				{% endfor %}
-			
+				
+				<br/>
+				Чердак: +23<br/>
+				Улица: +26<br/>
+				<br/>
+				<br/>
+				
+				Управление светом в доме: <img src="{{STATIC_URL}}images/button_on.jpg" width="10%"/> <img src="{{STATIC_URL}}images/button_off.jpg" width="10%"/><br/>
+				Включить систему "приход домой" (включение основного света 50% на первом этаже) <img src="{{STATIC_URL}}images/button_on.jpg" width="10%"/><br/>
+				Включить систему присутствия в доме <img src="{{STATIC_URL}}images/button_on.jpg" width="10%"/>
+				
 			{% else %}
 			
 			Нет данных по температуре
@@ -100,30 +125,16 @@
 		
 		
 		<div class="block_caption">
-			Канализация
+			◌ Канализация
 		</div>
 		
 		<div class="block_data">
-			<img src="{{ STATIC_URL }}images/sewage_.png"/> <br/>
-			{% if temp_data2 %}
-	
-				{% for t in temp_data2 %}
-					<i>{{ t.date }}</i> <b>{{ t.sensor }}</b>
-					| pio0: {{ t.pio_0}}
-					| pio1: {{ t.pio_1}}
-					| pio2: {{ t.pio_2}}
-					| pio3: {{ t.pio_3}}
-					| pio4: {{ t.pio_4}}
-					| pio5: {{ t.pio_5}}
-					| pio6: {{ t.pio_6}}
-					| pio7: {{ t.pio_7}}<br/>
-				{% endfor %}
+			<img src="{{ STATIC_URL }}images/sewage_.png"/> <br/><br/>
 			
-			{% else %}
+			Колодец 1 - 25% заполнения <br/>
+			Колодец 2 - 0% заполнения <br/>
+			<br/>
 			
-			Нет данных по PIO
-				
-			{% endif %}
 		</div>
 		
 		
@@ -135,28 +146,26 @@
 	
 	<div class="internal_block">
 		<div class="block_caption">
-			Полив газона
+			◌ Полив газона
 		</div>
 		
 		<div class="block_data">
-			картинка
+			Полив газона был включен 2013-02-21 00:00 по программе<br/>
+			Выключить систему автополива
+			<img src="{{STATIC_URL}}images/button_on.jpg" width="10%"/>
 		</div>
 		
 		<div class="block_caption">
-			Освещение участка
+			◌ Освещение участка
 		</div>
 		
 		<div class="block_data">
-			картинка
+			Освещение участка было выключено 2013-02-21 02:00 по программу
+			<br/>
+			Выключить освещение участка
+			<img src="{{STATIC_URL}}images/button_off.jpg" width="10%"/>
 		</div>
 		
-		<div class="block_caption">
-			Видео камеры
-		</div>
-		
-		<div class="block_data">
-			камеры....
-		</div>
 	</div>
 	
 </div>
@@ -166,8 +175,21 @@
 <div id="block3">
 	
 	<div class="internal_block">
+		
 		<div class="block_caption">
-			Прогноз погоды
+			◌ Камеры наблюдения
+		</div>
+		
+		<div class="block_data">
+			Cam-1 - Задний двор<br/>
+			<img src="{{STATIC_URL}}images/cam1.jpg" width="70%"/><br/><br/>
+			Cam-2 - Центральный вход<br/>
+			<img src="{{STATIC_URL}}images/cam2.jpg" width="70%"/><br/>
+			
+		</div>
+		
+		<div class="block_caption">
+			◌ Прогноз погоды
 		</div>
 		
 		<div class="block_data">
@@ -196,7 +218,7 @@
 	
 	<div class="internal_block">
 		<div class="block_caption">
-			Фаза луны
+			◌ Фаза луны
 		</div>
 		
 		<div class="block_data">
