@@ -8,23 +8,39 @@
 		
 	<div class="internal_block">
 		
+		
+		<div class="block_data">
+		
+			<script src="http://weatherandtime.net/swfobject.js" type="text/javascript" ></script>
+			<div id="div_clock_08" style="text-align:left; width:170px; height:100px;">
+				<div style="padding:0px 1px 1px 1px;position:absolute; z-index:100; color:#858585; text-align:center; width:170px;height:auto;">
+				</div>
+				<span id="swf_clock_08">&nbsp;</span>
+			</div>
+			<script type="text/javascript" language="Javascript">swfobject.embedSWF("http://weatherandtime.net/clock_08.swf", "swf_clock_08", "170", "100", "10","clock_08.swf", {city: "17469",lang:"ru",color:"#858585"}, {menu:"false",wmode:"transparent",allowScriptAccess:"always"}, {id:"clock_08",name:"clock_08"});
+			</script>
+		
+		</div>
+		
+		
+		
 		<div class="block_caption">
-			◌ Камеры наблюдения
+			<img src="{{ STATIC_URL }}images/cam.jpg" width="8%"/> Камеры наблюдения
 		</div>
 		
 		<div class="block_data">
 		
-			Cam-3 - Улица<br/>
+			<br/>
 			<img src="{{STATIC_URL}}images/cam3.jpg" width="70%"/><br/><br/>
 			
-			Cam-4 - Улица<br/>
+			<br/>
 			<img src="{{STATIC_URL}}images/cam4.jpg" width="70%"/><br/><br/>
 		
 		</div>
 		
 		
 		<div class="block_caption">
-			◌ Монитор событий smarty
+			<img src="{{ STATIC_URL }}images/logs.jpg" width="8%"/> Журнал системы
 		</div>
 		
 		<div class="block_data">
@@ -53,7 +69,7 @@
 	
 	<div class="internal_block">
 		<div class="block_caption">
-			◌ Монитор критических событий smarty
+			<img src="{{ STATIC_URL }}images/alerts.jpg" width="8%"/> Критические события
 		</div>
 		
 		<div class="block_data">
@@ -81,13 +97,13 @@
 	<div class="internal_block">
 		
 		<div class="block_caption">
-			◌ Состояние дома: температура, освещение
+			<img src="{{ STATIC_URL }}images/logo.png" width="20px"> Состояние дома: температура, освещение
 		</div>
 		
 		<div class="block_data">
 			<br/>
-			<img src="{{STATIC_URL}}images/home-model2013_1floor.png" width="38%"/>
-			<img src="{{STATIC_URL}}images/home-model2013_2floor.png" width="40%"/>
+			<img src="{{STATIC_URL}}images/home-model2013_1floor.png" width="89%"/>
+			<img src="{{STATIC_URL}}images/home-model2013_2floor.png" width="90%"/>
 			<br/>
 			{% if temp_data %}
 			
@@ -112,9 +128,33 @@
 				<br/>
 				<br/>
 				
-				Управление светом в доме: <img src="{{STATIC_URL}}images/button_on.jpg" width="10%"/> <img src="{{STATIC_URL}}images/button_off.jpg" width="10%"/><br/>
-				Включить систему "приход домой" (включение основного света 50% на первом этаже) <img src="{{STATIC_URL}}images/button_on.jpg" width="10%"/><br/>
-				Включить систему присутствия в доме <img src="{{STATIC_URL}}images/button_on.jpg" width="10%"/>
+				<table width="70%" border="0" style="background-color:#FFFFFF; font-family:Tahoma; font-size:12px; color:#000000;" cellpadding="2" cellspacing="2">
+				
+				<tr>
+				
+				<td width="200px" align="right"><img src="{{ STATIC_URL }}images/button_on.jpg" width="50%"/><img src="{{STATIC_URL}}images/button_off.jpg" width="50%"/></td>
+				<td align="left">Управление светом в доме:</td>
+				
+				</tr>
+				
+				
+				<tr>
+				
+				<td width="200px" align="right"><img src="{{ STATIC_URL }}images/button_on.jpg" width="50%"/> </td>
+				<td align="left">Включить систему "приход домой" (включение основного света 50% на первом этаже)</td>
+				
+				</tr>
+				
+				<tr>
+				
+				<td width="200px" align="right"><img src="{{ STATIC_URL }}images/button_on.jpg" width="50%"/> </td>
+				<td align="left">Включить систему присутствия в доме</td>
+				
+				</tr>
+				
+				</table>
+				 
+				
 				
 			{% else %}
 			
@@ -125,7 +165,7 @@
 		
 		
 		<div class="block_caption">
-			◌ Канализация
+			Канализация
 		</div>
 		
 		<div class="block_data">
@@ -146,24 +186,44 @@
 	
 	<div class="internal_block">
 		<div class="block_caption">
-			◌ Полив газона
+			Полив газона
 		</div>
 		
 		<div class="block_data">
-			Полив газона был включен 2013-02-21 00:00 по программе<br/>
-			Выключить систему автополива
-			<img src="{{STATIC_URL}}images/button_on.jpg" width="10%"/>
+			
+			<table width="70%" border="0" style="background-color:#FFFFFF; font-family:Tahoma; font-size:12px; color:#000000;" cellpadding="2" cellspacing="2">
+				
+				<tr>
+				
+				<td width="200px" align="right"><img src="{{STATIC_URL}}images/button_on.jpg" width="50%"/></td>
+				<td align="left">Полив газона был включен 2013-02-21 00:00 по программе<br/> <b>Выключить систему автополива</b></td>
+				
+				</tr>
+			</table>
+			
+			
 		</div>
 		
 		<div class="block_caption">
-			◌ Освещение участка
+			<img src="{{ STATIC_URL }}images/light.png" width="3%"/> Освещение участка
 		</div>
 		
 		<div class="block_data">
-			Освещение участка было выключено 2013-02-21 02:00 по программу
-			<br/>
-			Выключить освещение участка
-			<img src="{{STATIC_URL}}images/button_off.jpg" width="10%"/>
+			
+			
+			<table width="70%" border="0" style="background-color:#FFFFFF; font-family:Tahoma; font-size:12px; color:#000000;" cellpadding="2" cellspacing="2">
+				
+				<tr>
+				
+				<td width="200px" align="right"><img src="{{STATIC_URL}}images/button_off.jpg" width="50%"/></td>
+				<td align="left">Освещение участка было выключено 2013-02-21 02:00 по программу<br/> <b>Выключить освещение участка</b></td>
+				
+				</tr>
+			</table>
+			
+		
+			
+			
 		</div>
 		
 	</div>
@@ -177,19 +237,19 @@
 	<div class="internal_block">
 		
 		<div class="block_caption">
-			◌ Камеры наблюдения
+			<img src="{{ STATIC_URL }}images/cam.jpg" width="8%"/> Камеры наблюдения
 		</div>
 		
 		<div class="block_data">
-			Cam-1 - Задний двор<br/>
+			<br/>
 			<img src="{{STATIC_URL}}images/cam1.jpg" width="70%"/><br/><br/>
-			Cam-2 - Центральный вход<br/>
+			<br/>
 			<img src="{{STATIC_URL}}images/cam2.jpg" width="70%"/><br/>
 			
 		</div>
 		
 		<div class="block_caption">
-			◌ Прогноз погоды
+			Прогноз погоды
 		</div>
 		
 		<div class="block_data">
@@ -214,11 +274,23 @@
 			</table>
 			
 		</div>
+		
+		
+		<div class="block_caption">
+			Курсы валют
+		</div>
+		
+		<div class="block_data">
+			
+			<img src="http://www.obmennik.by/images/kurs/bestkurs120x1208.png" width="120" height="120" border="0" alt="Лучший курс обмена в банках Беларуси">
+						
+		</div>
+		
 	</div>
 	
 	<div class="internal_block">
 		<div class="block_caption">
-			◌ Фаза луны
+			Фаза луны
 		</div>
 		
 		<div class="block_data">

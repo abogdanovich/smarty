@@ -4741,3 +4741,8 @@
 [Thu Feb 21 13:00:45 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 3, in <module>
 [Thu Feb 21 13:00:45 2013] [error] [client 127.0.0.1]     import os, sys, settings
 [Thu Feb 21 13:00:45 2013] [error] [client 127.0.0.1] ImportError: No module named settings
+[Fri Feb 22 16:12:35 2013] [error] [client 127.0.0.1] (13)Permission denied: file permissions deny server access: /home/alex/django/smarty/static/images/cam.png, referer: http://127.0.0.1:81/
+[Fri Feb 22 07:12:41 2013] [error] [client 127.0.0.1] (13)Permission denied: file permissions deny server access: /home/alex/django/smarty/static/images/cam.png, referer: http://127.0.0.1:81/
+[Fri Feb 22 07:13:18 2013] [error] [client 127.0.0.1] (13)Permission denied: file permissions deny server access: /home/alex/django/smarty/static/images/cam.jpg, referer: http://127.0.0.1:81/
+[Fri Feb 22 07:13:24 2013] [error] [client 127.0.0.1] (13)Permission denied: file permissions deny server access: /home/alex/django/smarty/static/images/cam.jpg
+[Fri Feb 22 07:13:45 2013] [error] [client 127.0.0.1] (13)Permission denied: file permissions deny server access: /home/alex/django/smarty/static/images/cam.jpg
