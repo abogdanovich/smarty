@@ -48,6 +48,22 @@ DATABASES = {
     }
 }
 
+
+############################################
+#dajaxproject
+DAJAXICE_DEBUG = False
+
+DAJAXICE_MEDIA_PREFIX = "dajax"
+DAJAXICE_CACHE_CONTROL = 5*24*60*60 #days*hours*min*seconds
+
+DAJAXICE_FUNCTIONS = (
+	'smarty.ajax.test',
+	
+)
+
+############################################
+
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -144,7 +160,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'smarty.web',
     'djcelery',
-    
+    'dajaxice', 
+    'dajax',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

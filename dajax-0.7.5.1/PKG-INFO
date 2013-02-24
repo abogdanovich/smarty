@@ -1,0 +1,19 @@
+Metadata-Version: 1.0
+Name: dajax
+Version: 0.7.5.1
+Summary: Easy to use ajax library for django
+Home-page: http://dajaxproject.com
+Author: Benito Jorge Bastida Perez
+Author-email: jorge@thecodefarm.com
+License: UNKNOWN
+Download-URL: http://dajaxproject.googlecode.com/files/dajax-0.7.5.1.tar.gz
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Utilities

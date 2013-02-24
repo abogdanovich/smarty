@@ -23,6 +23,7 @@
 		{% csrf_token %}
 		<input type="text" name="sensor_address" value="{{ s.address }}" style="background-color: green;"/>
 		<input type="text" name="sensor_alias" value="{{ s.alias }}" style="background-color: green;"/>
+		<input type="hidden" name="sensor_family" value="{{ s.family }}"/>
 		<input type="submit" name="add_sensor" value="обновить сенсор" />
 	        </form>
 		{% else %}
