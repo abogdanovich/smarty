@@ -20,10 +20,13 @@ import datetime
 #######################################################################
 
 @dajaxice_register
-def test(request):
+def test(request, uid):
     dajax = Dajax()
     
-    dajax.alert("test dajax func is OK!")
+    path = "%simages/button_off.jpg" % (settings.STATIC_URL)
+    dajax.alert("test is OK")
+    dajax.assign('#poliv_button','src',path)
+    
     
     return dajax.json()
 

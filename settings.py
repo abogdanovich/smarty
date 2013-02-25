@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-#########################################################################
-# Django settings for smarty project.
-# author Alex Bogdanovich
-# 2013 
-#########################################################################
-
 import os, sys
 import socket
 #import logging
@@ -19,7 +11,7 @@ hostname = socket.gethostname()
 PROJECT_ROOT= os.path.realpath(os.path.dirname(__file__))
 
 #loging    
-#logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+')
+#logging.basicConfig(level=logging.ERROR, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+')
 
 
 DEBUG = True
@@ -57,8 +49,7 @@ DAJAXICE_MEDIA_PREFIX = "dajax"
 DAJAXICE_CACHE_CONTROL = 5*24*60*60 #days*hours*min*seconds
 
 DAJAXICE_FUNCTIONS = (
-	'smarty.ajax.test',
-	
+	'smarty.ajax.test',	
 )
 
 ############################################

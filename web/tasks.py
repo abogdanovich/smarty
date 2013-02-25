@@ -27,8 +27,8 @@ def get_temperature():
     sensors = utils.get_sensors(28) #get only 28 family type sensors
 
     #заносим в монитор события опроса
-    message = u"программа получения температуры стратовала"
-    utils.save_monitor(message, 0)
+    #message = u"получение температу"
+    #utils.save_monitor(message, 0)
     
     ow.init(utils.owserver)
     
@@ -39,11 +39,11 @@ def get_temperature():
 	    
 	    if s_temp:
 		if utils.save_temperature(s.address, s_temp):
-		    message = u"сохранения данных датчика: %s" % (s.alias)
+		    message = u"сохранения данных: %s" % (s.alias)
 		    #print message
 		    utils.save_monitor(message, 0)
 		else:
-		    message = u"ошибка сохранения данных датчика: %s" % (s.alias)
+		    message = u"ошибка сохранения данных: %s" % (s.alias)
 		    #print message
 		    utils.save_monitor(message, 0)
 		    
@@ -51,7 +51,7 @@ def get_temperature():
 	    # если датчик не отвечает - увеличиваем поле errors заносим alarm
 	    utils.update_sensor_errors(s.address, 1) #sensor error! set+1 for sensor errors
 
-    message = u"опрос датчиков температуры завершен"
+    #message = u"опрос датчиков температуры завершен"
     utils.save_monitor(message, 0)
     
 #########################################################################
@@ -74,13 +74,13 @@ def get_sewage():
     sensor = utils.get_sensor(str('293EA141E1FC6712')) #get only 28 family type sensors
 
     #заносим в монитор события опроса
-    message = u"программа получения уровня канализации стратовала"
-    utils.save_monitor(message, 0)
+    #message = u"программа получения уровня канализации стратовала"
+    #utils.save_monitor(message, 0)
     
     ow.init(utils.owserver)
     
     try:
-	print sensor.address
+	#print sensor.address
 	data = ow.Sensor(str('/' + sensor.address)).PIO_ALL
 	#print s_sewage
 	
@@ -88,11 +88,11 @@ def get_sewage():
 	
 	if data:
 	    if utils.save_pio(sensor.address, data):
-		message = u"сохранения данных датчика: %s" % (sensor.alias)
+		message = u"сохранения данных: %s" % (sensor.alias)
 		#print message
 		utils.save_monitor(message, 0)
 	    else:
-		message = u"ошибка сохранения данных датчика: %s" % (sensor.alias)
+		message = u"ошибка сохранения данных: %s" % (sensor.alias)
 		#print message
 		utils.save_monitor(message, 0)
 		
@@ -100,8 +100,8 @@ def get_sewage():
 	# если датчик не отвечает - увеличиваем поле errors заносим alarm
 	utils.update_sensor_errors(sensor.address, 1) #sensor error! set+1 for sensor errors
 
-    message = u"программа получения уровня канализации ЗАВЕРШЕНА"
-    utils.save_monitor(message, 0)
+    #message = u"программа получения уровня канализации ЗАВЕРШЕНА"
+    #utils.save_monitor(message, 0)
 
 #########################################################################
 

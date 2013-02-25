@@ -47,7 +47,8 @@ def sensors(request):
     
     if request.method == 'POST' and 'add_sensor' in request.POST:
         #save sensor
-        if utils.add_sensor(request.POST['sensor_address'], request.POST['sensor_alias'], int(request.POST['sensor_family'])):        
+        
+        if utils.add_sensor(request.POST['sensor_address'], request.POST['sensor_alias'], int(request.POST['sensor_family']), request.POST['sensor_extra']):        
             #d = dict(request=request, slist=slist, message=message)
             return redirect('/sensors/')
         else:
@@ -90,13 +91,6 @@ def sensors(request):
 
 #########################################################################
 
-def video(request):
-
-    d = dict(request=request)
-    return render_to_response('web/video.html', d, context_instance=RequestContext(request))
-
-#########################################################################
-
 def settings(request):
 
     message = ''
@@ -104,8 +98,9 @@ def settings(request):
     #utils.draw_timeline('svet')
     
     controllers = utils.get_sensors(29) #controllers
+    temp_data = utils.get_temperature()
     
-    d = dict(request=request, message=message, controllers=controllers)
+    d = dict(request=request, message=message, controllers=controllers, temp_data=temp_data)
     return render_to_response('web/settings.html', d, context_instance=RequestContext(request))
 
 #########################################################################

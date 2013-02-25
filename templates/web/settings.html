@@ -4,110 +4,150 @@
 
 <br/>
 
-<table width="100%" border="0" cellpadding="2" cellspacing="5">
+	<iframe src="http://localhost/zm/index.php" width="100%" frameborder="0" height="50%" ></iframe>
 
-<tr>
-<td width="25%">
-<b>График полива газона</b>
-
-{% if controllers %}
-	<select>
+<br/>
 	
-	{% for c in controlles %}
-		<option value="{{ c.address }}">{{ c.alias }}</option>
+	<table width="100%" border="1" cellpadding="2" cellspacing="5">
+	
+	<tr>
+	<td width="25%">
+	<b>График полива газона</b>
+	
+	{% if controllers %}
+		<select>
 		
-	{% endfor %}
-	
-	</select>
-
-{% endif %}
-
-</td>
-
-
-<td align="right" width="40%">
-
-<form action="/settings/" method="post">
-{% csrf_token %}
-<label for="c_from_water">From</label>
-<input type="text" id="c_from_water" name="c_from_water" />
-<label for="c_to_water">to</label>
-<input type="text" id="c_to_water" name="c_to_water" />
-
-<br/><br/>
-Время полива<br/>
-<input type="text" id="c_from_water_time" name="c_from_water_time" value="00:00"/>
-<input type="text" id="c_to_water_time" name="c_to_water_time" value="02:00"/>
-<br/>
-<label for="c_check_raind_days">Количество дней после дождя</label>
-<input type="text" id="c_check_raind_days" name="c_check_raind_days" value="2"/>
-
-<br/>
-<br/>
-<input type="button" name="save_water_settings" value="сохранить автополив">
-<br/><br/>
-</form>
-
-</td>
-
-<td align="center"><img src="{{ MEDIA_URL }}timelinepoliv.jpg"></td>
-
-</tr>
-
-<tr>
-<td>
-<b>График освещения участка</b>
-{% if controllers %}
-	<select>
-	
-	{% for c in controlles %}
-		<option value="{{ c.address }}">{{ c.alias }}</option>
+		{% for c in controlles %}
+			<option value="{{ c.address }}">{{ c.alias }}</option>
+			
+		{% endfor %}
 		
-	{% endfor %}
+		</select>
 	
-	</select>
+	{% endif %}
+	
+	</td>
+	
+	
+	<td align="right" width="40%">
+	
+	<form action="/settings/" method="post">
+	{% csrf_token %}
+	<label for="c_from_water">From</label>
+	<input type="text" id="c_from_water" name="c_from_water" />
+	<label for="c_to_water">to</label>
+	<input type="text" id="c_to_water" name="c_to_water" />
+	
+	<br/><br/>
+	Время полива<br/>
+	<input type="text" id="c_from_water_time" name="c_from_water_time" value="00:00"/>
+	<input type="text" id="c_to_water_time" name="c_to_water_time" value="02:00"/>
+	<br/>
+	<label for="c_check_raind_days">Количество дней после дождя</label>
+	<input type="text" id="c_check_raind_days" name="c_check_raind_days" value="2"/>
+	
+	<br/>
+	<br/>
+	<input type="button" name="save_water_settings" value="сохранить автополив">
+	<br/><br/>
+	</form>
+	
+	</td>
+	
+	<td align="center"><img src="{{ MEDIA_URL }}timelinepoliv.jpg"></td>
+	
+	</tr>
+	
+	<tr>
+	<td>
+	<b>График освещения участка</b>
+	{% if controllers %}
+		<select>
+		
+		{% for c in controlles %}
+			<option value="{{ c.address }}">{{ c.alias }}</option>
+			
+		{% endfor %}
+		
+		</select>
+	
+	{% endif %}
+	</td>
+	
+	
+	<td align="right">
+	
+	<form action="/settings/" method="post">
+	{% csrf_token %}
+	<label for="c_from_svet">From</label>
+	<input type="text" id="c_from_svet" name="c_from_svet" />
+	
+	<label for="c_to_svet">to</label>
+	<input type="text" id="c_to_svet" name="c_to_svet" />
+	<br/>
+	<br/>
+	Время влючения света
+	<br/>
+	<input type="text" id="c_from_svet_time" name="c_from_svet_time" value="00:00"/>
+	<input type="text" id="c_to_svet_time" name="c_to_svet_time" value="02:00"/>
+	<br/>
+	<br/>
+	<label for="c_check_light_sensor">Учитывать датчика освещения?</label>
+	<input type="checkbox" id="c_check_light_sensor" name="c_check_light_sensor" />
+	<br/>
+	<br/>
+	<input type="button" name="save_light_settings" value="сохранить автоосвещение">
+	<br/><br/>
+	</form>
+	
+	</td>
+	
+	<td align="center"><img src="{{ MEDIA_URL }}timelinesvet.jpg"></td>
+	
+	</tr>
+	
+	</table>
 
-{% endif %}
-</td>
-
-
-<td align="right">
-
-<form action="/settings/" method="post">
-{% csrf_token %}
-<label for="c_from_svet">From</label>
-<input type="text" id="c_from_svet" name="c_from_svet" />
-
-<label for="c_to_svet">to</label>
-<input type="text" id="c_to_svet" name="c_to_svet" />
 <br/>
-<br/>
-Время влючения света
-<br/>
-<input type="text" id="c_from_svet_time" name="c_from_svet_time" value="00:00"/>
-<input type="text" id="c_to_svet_time" name="c_to_svet_time" value="02:00"/>
-<br/>
-<br/>
-<label for="c_check_light_sensor">Учитывать датчика освещения?</label>
-<input type="checkbox" id="c_check_light_sensor" name="c_check_light_sensor" />
-<br/>
-<br/>
-<input type="button" name="save_light_settings" value="сохранить автоосвещение">
-<br/><br/>
-</form>
 
-</td>
+	<div style="width: 58%;">
+		<div id="home_plan" style="border: 1px dotted gray; padding: 5px; position: relative;">
+			<img src="{{STATIC_URL}}images/home-model2013_1floor.png" width="89%"/><br/>
+			<img src="{{STATIC_URL}}images/home-model2013_2floor.png" width="90%"/>
+			
+			{% if temp_data %}
+			
+				{% for t in temp_data %}
+					
+					{% if t.data < 19 %}
+						<div style="position: absolute; cursor: pointer; border: 1px groove black; padding: 3px; left: {{ t.x }}px; top: {{ t.y }}px; width: 30px; height: 30px; background-color: #99B3FF;">
+							<b>{{ t.sensor }}</b> <br/>{{ t.data}}
+						</div>
+					{% else %}
+						{% if t.data > 19 and t.data < 25 %}
+							<div style="position: absolute; cursor: pointer; border: 1px groove black; padding: 3px; left: {{ t.x }}px; top: {{ t.y }}px; width: 30px; height: 30px; background-color: #B3FF99;">
+								<b>{{ t.sensor }}</b> <br/>{{ t.data}}
+							</div>
+						{% else %}
+							<div style="position: absolute; cursor: pointer; border: 1px groove black; padding: 3px; left: {{ t.x }}px; top: {{ t.y }}px; width: 30px; height: 30px; background-color: #FFB399;">
+								<b>{{ t.sensor }}</b> <br/>{{ t.data}}
+							</div>
+						{% endif %}
+					{% endif %}
+				
+				{% endfor %}
+		
+				
+			{% endif %}
+			
+			
+		</div>
+	</div>
 
-<td align="center"><img src="{{ MEDIA_URL }}timelinesvet.jpg"></td>
-
-</tr>
 
 
-
-</table>
-
-{% if message %}
-	<font color="blue">{{ message }}</font>
-{% endif %}
+	{% if message %}
+		<font color="blue">{{ message }}</font>
+	{% endif %}
 
 {% endblock %}

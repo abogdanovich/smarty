@@ -17,6 +17,7 @@ class Sensor(models.Model): #all sensors
     locked = models.IntegerField(default=0) # 1 locked (can't work) by smarty or human - critical errors, 0 - can work - no errors
     errors = models.IntegerField(default=0) #count of errors | 2 errors - autoblock sensor + set alarm
     family = models.IntegerField() #28 or 29, 28 - DS18B20| 29 - DS2408
+    extra = models.CharField(max_length=30) #any extra info
     
     def __unicode__(self):
         return self.address

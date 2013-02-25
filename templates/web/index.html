@@ -21,7 +21,9 @@
 
 
 <script src="{{ STATIC_URL }}js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script src="{{ STATIC_URL }}js/jquery-ui.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.dajax.core.js"></script>
+<script src="{{ STATIC_URL }}js/func.js" type="text/javascript" charset="utf-8"></script>
 
  <script>
   $(function() {
@@ -73,14 +75,13 @@
   
     <body>
 	    
-	    <h1><img src="{{ STATIC_URL }}images/logo.png" width="30px">  Smarty Home System ░ <a href="/">Система</a> ░ <a href="/sensors">Сенсоры</a> ░ <a href="/video">Видео</a> ░ <a href="/settings">Настройки</a></h1>
+	    <h1><img src="{{ STATIC_URL }}images/logo.png" width="30px">  <a href="/">Smarty Home System</a> | <a href="/sensors">Сенсоры</a> | <a href="/settings">Настройки</a></h1>
 	    
 	    
 	    
 	    
 	    {% block main %}{% endblock %}
 	    {% block sensors %}{% endblock %}
-	    {% block video %}{% endblock %}
 	    {% block settings %}{% endblock %}
 	  
 </body>

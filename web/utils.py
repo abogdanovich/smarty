@@ -25,6 +25,7 @@ import logging
 import ow
 import PIL
 import Image, ImageDraw
+import random
 #########################################################################
 
 #Global settings
@@ -38,13 +39,15 @@ owserver = 'localhost:4444'
 #Sensors functions
 #########################################################################
 
-def add_sensor(sensor_address, sensor_alias, sensor_family):
+def add_sensor(sensor_address, sensor_alias, sensor_family, sensor_extra):
     
     try:
         sensor = Sensor.objects.get(address=sensor_address)
         sensor.delete()
+        sensor= Sensor(address=sensor_address, alias=sensor_alias, active=0, locked=0, errors=0, family=sensor_family, extra=sensor_extra)
+        sensor.save()
     except Sensor.DoesNotExist:
-        sensor= Sensor(address=sensor_address, alias=sensor_alias, active=0, locked=0, errors=0, family=sensor_family)
+        sensor= Sensor(address=sensor_address, alias=sensor_alias, active=0, locked=0, errors=0, family=sensor_family, extra=sensor_extra)
         sensor.save()
 
     return sensor.id
@@ -104,9 +107,9 @@ def update_sensor_errors(sensor_address, flag):
             if check_block_sensor(sensor_address):
                 #let's lock sensor
                 sensor.locked = 1
-                sid = set_alert(sensor.alias, 1, u"can't read sensor data")
-                message = u"ошибка чтения датчика : %s" % (sensor.alias)
-                print message
+                sid = set_alert(sensor.alias, 1, u"нет данных датчика")
+                message = u"ошибка чтения: %s" % (sensor.alias)
+                #print message
                 save_monitor(message, sid.id)    
             
             #save sensor state    
@@ -134,7 +137,7 @@ def save_temperature(sensor, data):
     try:
         sensor = Temperature(sensor=sensor, data=data, date=get_unix_datetime())
         sensor.save()
-        print "saved temperature data"
+        #print "saved temperature data"
     except:
         sensor = []
 
@@ -149,7 +152,7 @@ def save_pio(sensor, data):
 
         s = Controller(sensor=sensor, pio_0=spio[0], pio_1=spio[1], pio_2=spio[2], pio_3=spio[3], pio_4=spio[4], pio_5=spio[5], pio_6=spio[6], pio_7=spio[7], date=get_unix_datetime())
         s.save()
-        print "saved PIO DATA"
+        #print "saved PIO DATA"
     except:
         s = []
 
@@ -163,14 +166,20 @@ def get_temperature():
     
     for s in sensors:
         sensor_data = Temperature.objects.filter(sensor=s.address).order_by('-date')[:1]
-        #print sensor_data
+            
+        if s.extra:
+            coords = s.extra.split("|")
+            x = random.randint(100,300)#coords[0]
+            y = random.randint(100,500)#coords[1]
+        else:
+            x = random.randint(100,300)#0
+            y = random.randint(100,500)#0
+        
         if sensor_data:
             date = convert_unix_date('all', sensor_data[0].date)
-            temp_data.append({'sensor': s.alias, 'date': date, 'data': sensor_data[0].data})
+            temp_data.append({'sensor': s.alias, 'date': date, 'data': sensor_data[0].data, 'x': x, 'y': y})
         else:
-            #date = convert_unix_date('all', sensor_data[0].date)
-            temp_data.append({'sensor': s.alias, 'date': 0, 'data': 0})
-            
+            temp_data.append({'sensor': s.alias, 'date': 0, 'data': 0, 'x': x, 'y': y})
 
     return temp_data
 
@@ -193,10 +202,10 @@ def get_piodata():
 
 def get_monitor_events():
     
-    e = Monitor.objects.all().order_by('-date')[:10]
+    e = Monitor.objects.all().order_by('-date')[:20]
     events = []
     for event in e:
-        date = convert_unix_date('all', event.date)
+        date = convert_unix_date('time', event.date)
         events.append({'action': event.action, 'date': date, 'status': event.status})
     
     return events
@@ -228,9 +237,9 @@ RRDTOOL
 
 	ow.init('localhost:4444')
 	sensors = ow.Sensor("/").sensorList()
-	metric1 = sensors[0].temperature
-	metric2 = sensors[1].temperature
-	metric3 = sensors[2].temperature
+	s1 = sensors[0].temperature
+	s2 = sensors[1].temperature
+	s3 = sensors[2].temperature
 	    
 	ret = rrd_update(fullpath, 'N:%s:%s:%s' % (metric1, metric2, metric3))
 	
