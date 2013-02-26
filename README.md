@@ -24,7 +24,7 @@ Smarty Home System
 - DALLAS DS18B20 - temperature sensor (http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf)
 - DALLAS DS2408 - for relays controlling (http://www.maximintegrated.com/datasheet/index.mvp/id/3818)
 - DALLAS DS2423 - counter for any impulse devices (http://datasheets.maximintegrated.com/en/ds/DS2423.pdf)
-- DALLAS DS2490 - USB to 1-Wire Bridge Chip (master)
+- DALLAS DS9490R - USB to 1-Wire Bridge Chip (master)
 
 **server hardware|software**
 - cubox (http://solid-run.com/cubox)

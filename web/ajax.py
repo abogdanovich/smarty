@@ -23,10 +23,9 @@ import datetime
 def test(request, uid):
     dajax = Dajax()
     
-    path = "%simages/button_off.jpg" % (settings.STATIC_URL)
+    #path = "%simages/button_off.jpg" % (settings.STATIC_URL)
     dajax.alert("test is OK")
-    dajax.assign('#poliv_button','src',path)
-    
+    #dajax.assign('#poliv_button','src',path)
     
     return dajax.json()
 

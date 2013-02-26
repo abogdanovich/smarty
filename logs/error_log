@@ -5018,3 +5018,255 @@
 [Mon Feb 25 11:36:49 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
 [Mon Feb 25 11:36:49 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
 [Mon Feb 25 11:36:49 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/log/smarty.log'
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1] mod_wsgi (pid=19566): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module., referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1] mod_wsgi (pid=19566): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'., referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1] Traceback (most recent call last):, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]     import settings, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+'), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open()), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/log/smarty.log', referer: http://smarty:81/settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1] mod_wsgi (pid=19564): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1] mod_wsgi (pid=19564): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]     import settings
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+')
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Mon Feb 25 17:19:37 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/log/smarty.log'
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1] mod_wsgi (pid=19562): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module., referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1] mod_wsgi (pid=19562): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'., referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1] Traceback (most recent call last):, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]     import settings, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+'), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open()), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/log/smarty.log', referer: http://smarty:81/settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1] mod_wsgi (pid=19566): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1] mod_wsgi (pid=19566): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]     import settings
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+')
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Mon Feb 25 17:19:39 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/log/smarty.log'
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1] mod_wsgi (pid=19564): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module., referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1] mod_wsgi (pid=19564): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'., referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1] Traceback (most recent call last):, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]     import settings, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+'), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open()), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open, referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode), referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/log/smarty.log', referer: http://smarty:81/settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1] mod_wsgi (pid=20293): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1] mod_wsgi (pid=20293): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]     import settings
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+')
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Mon Feb 25 17:19:45 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/log/smarty.log'
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1] mod_wsgi (pid=25485): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module., referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1] mod_wsgi (pid=25485): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'., referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1] Traceback (most recent call last):, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]     import settings, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+'), referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode), referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open()), referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode), referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log', referer: http://smarty:81/settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1] mod_wsgi (pid=25482): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1] mod_wsgi (pid=25482): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]     import settings
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Mon Feb 25 17:21:53 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1] mod_wsgi (pid=25483): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module., referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1] mod_wsgi (pid=25483): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'., referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1] Traceback (most recent call last):, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]     import settings, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+'), referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode), referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open()), referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open, referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode), referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log', referer: http://smarty:81/settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1] mod_wsgi (pid=25486): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1] mod_wsgi (pid=25486): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]     import settings
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Mon Feb 25 17:21:59 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1215): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1215): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1]     import settings
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Tue Feb 26 14:30:05 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1211): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1211): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1]     import settings
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Tue Feb 26 14:30:06 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1214): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1214): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]     import settings
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1213): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1213): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]     import settings
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Tue Feb 26 14:30:07 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1212): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1212): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1]     import settings
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Tue Feb 26 14:45:44 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1] mod_wsgi (pid=22831): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1] mod_wsgi (pid=22831): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1]     import settings
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Tue Feb 26 14:45:45 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1215): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1215): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     import settings
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1211): Target WSGI script '/home/alex/django/smarty/deploy/django.wsgi' cannot be loaded as Python module.
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1] mod_wsgi (pid=1211): Exception occurred processing WSGI script '/home/alex/django/smarty/deploy/django.wsgi'.
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/deploy/django.wsgi", line 27, in <module>
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     import settings
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/home/alex/django/smarty/settings.py", line 14, in <module>
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 1519, in basicConfig
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     hdlr = FileHandler(filename, mode)
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 897, in __init__
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     StreamHandler.__init__(self, self._open())
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
+[Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'

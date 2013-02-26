@@ -169,15 +169,15 @@ def get_temperature():
             
         if s.extra:
             coords = s.extra.split("|")
-            x = random.randint(100,300)#coords[0]
-            y = random.randint(100,500)#coords[1]
+            x = random.randint(10,600)#coords[0]
+            y = random.randint(10,600)#coords[1]
         else:
-            x = random.randint(100,300)#0
-            y = random.randint(100,500)#0
+            x = random.randint(10,600)#0
+            y = random.randint(10,600)#0
         
         if sensor_data:
             date = convert_unix_date('all', sensor_data[0].date)
-            temp_data.append({'sensor': s.alias, 'date': date, 'data': sensor_data[0].data, 'x': x, 'y': y})
+            temp_data.append({'sensor': s.alias, 'date': date, 'data': round(sensor_data[0].data, 1), 'x': x, 'y': y})
         else:
             temp_data.append({'sensor': s.alias, 'date': 0, 'data': 0, 'x': x, 'y': y})
 

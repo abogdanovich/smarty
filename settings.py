@@ -1,6 +1,6 @@
 import os, sys
 import socket
-#import logging
+import logging
 import djcelery
 import pytz
 
@@ -11,7 +11,7 @@ hostname = socket.gethostname()
 PROJECT_ROOT= os.path.realpath(os.path.dirname(__file__))
 
 #loging    
-#logging.basicConfig(level=logging.ERROR, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'log/smarty.log'), filemode='a+')
+logging.basicConfig(level=logging.DEBUG, format = '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s', filename=os.path.join(PROJECT_ROOT, 'logs/smarty.log'), filemode='a+')
 
 
 DEBUG = True
@@ -34,7 +34,6 @@ DATABASES = {
         'NAME': 'smarty',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': '1234',                  # Not used with sqlite3.
-        #'HOST': '/opt/lampp/var/mysql/mysql.sock',                      # Set to empty string for localhost. Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -49,7 +48,7 @@ DAJAXICE_MEDIA_PREFIX = "dajax"
 DAJAXICE_CACHE_CONTROL = 5*24*60*60 #days*hours*min*seconds
 
 DAJAXICE_FUNCTIONS = (
-	'smarty.ajax.test',	
+	'web.ajax.test',	
 )
 
 ############################################
@@ -152,7 +151,7 @@ INSTALLED_APPS = (
     'smarty.web',
     'djcelery',
     'dajaxice', 
-    'dajax',
+    'dajax', 
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

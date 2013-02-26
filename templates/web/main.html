@@ -183,17 +183,21 @@
 				{% for t in temp_data %}
 					
 					{% if t.data < 19 %}
-						<div style="position: absolute; cursor: pointer; border: 1px groove black; padding: 3px; left: {{ t.x }}px; top: {{ t.y }}px; width: 30px; height: 30px; background-color: #99B3FF;">
-							<b>{{ t.sensor }}</b> <br/>{{ t.data}}
+						<div class="temperature" style="left: {{ t.x }}px; top: {{ t.y }}px;">
+							<div style="position: absolute; left: 0px; top: 0px;"><img src="{{ STATIC_URL }}images/t_cold.jpg"></div>
+							<div style="position: absolute; left: 13px; top: 40px;">{{ t.data}}</div>
 						</div>
 					{% else %}
 						{% if t.data > 19 and t.data < 25 %}
-							<div style="position: absolute; cursor: pointer; border: 1px groove black; padding: 3px; left: {{ t.x }}px; top: {{ t.y }}px; width: 30px; height: 30px; background-color: #B3FF99;">
-								<b>{{ t.sensor }}</b> <br/>{{ t.data}}
+							<div class="temperature" style="left: {{ t.x }}px; top: {{ t.y }}px;">
+								<div style="position: absolute; left: 0px; top: 0px;"><img src="{{ STATIC_URL }}images/t_normal.jpg"></div>
+								<div style="position: absolute; left: 13px; top: 40px;">{{ t.data}}</div>
+								
 							</div>
 						{% else %}
-							<div style="position: absolute; cursor: pointer; border: 1px groove black; padding: 3px; left: {{ t.x }}px; top: {{ t.y }}px; width: 30px; height: 30px; background-color: #FFB399;">
-								<b>{{ t.sensor }}</b> <br/>{{ t.data}}
+							<div class="temperature" style="left: {{ t.x }}px; top: {{ t.y }}px;">
+								<div style="position: absolute; left: 0px; top: 0px;"><img src="{{ STATIC_URL }}images/t_hot.jpg"></div>
+								<div style="position: absolute; left: 13px; top: 40px;">{{ t.data}}</div>
 							</div>
 						{% endif %}
 					{% endif %}
