@@ -44,7 +44,7 @@ DATABASES = {
 #dajaxproject
 DAJAXICE_DEBUG = False
 
-DAJAXICE_MEDIA_PREFIX = "dajax"
+DAJAXICE_MEDIA_PREFIX = "dajaxice"
 DAJAXICE_CACHE_CONTROL = 5*24*60*60 #days*hours*min*seconds
 
 DAJAXICE_FUNCTIONS = (
@@ -52,7 +52,6 @@ DAJAXICE_FUNCTIONS = (
 )
 
 ############################################
-
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -116,7 +115,8 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+#   'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'dajaxice.finders.DajaxiceFinder',
 )
 
 # Make this unique, and don't share it with anybody.

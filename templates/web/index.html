@@ -1,9 +1,10 @@
-{% load dajaxice_templatetags %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" SYSTEM "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <meta http-equiv="Content-Type" content="text/html;charset=windows-1251">
 <head>
+
+{% load dajaxice_templatetags %}
 
 <meta http-equiv="Cache-Control" content="no-cache, no-store, max-age=0, must-revalidate"/>
 
@@ -12,7 +13,7 @@
 <!-- css section -->
 
 <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery-ui.css" />
 <!--
 <link href="{{ STATIC_URL }}css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 -->
@@ -22,9 +23,12 @@
 
 
 <script src="{{ STATIC_URL }}js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="{{ STATIC_URL }}js/jquery.dajax.core.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="{{ STATIC_URL }}js/jquery-ui.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.dajax.core.js"></script>
 <script src="{{ STATIC_URL }}js/func.js" type="text/javascript" charset="utf-8"></script>
+
+{% dajaxice_js_import %} 
 
  <script>
   $(function() {
@@ -71,8 +75,6 @@
   </script>
  
 <!-- end js section -->
-
-{% dajaxice_js_import %}
 
 </head>
   

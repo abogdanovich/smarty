@@ -8,10 +8,14 @@
 
 from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
+from dajaxice.core import dajaxice_autodiscover
+
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
+dajaxice_autodiscover()
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -20,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^', include('web.urls')),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.PROJECT_ROOT+'/static'}),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.PROJECT_ROOT+'/media'}),
-    url(r'^%s/' % settings.DAJAXICE_MEDIA_PREFIX, include('dajaxice.urls')),
+    url(r'^dajaxice/', include('dajaxice.urls')),
     
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

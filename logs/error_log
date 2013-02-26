@@ -5270,3 +5270,4 @@
 [Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]   File "/usr/lib/python2.7/logging/__init__.py", line 916, in _open
 [Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1]     stream = open(self.baseFilename, self.mode)
 [Tue Feb 26 14:46:15 2013] [error] [client 127.0.0.1] IOError: [Errno 13] Permission denied: '/home/alex/django/smarty/logs/smarty.log'
+[Tue Feb 26 11:29:12 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/dajax, referer: http://127.0.0.1:81/
