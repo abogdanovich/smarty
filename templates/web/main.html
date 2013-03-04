@@ -36,7 +36,7 @@
 				
 				<tr>
 				
-				<td width="200px" align="left"><img src="{{ STATIC_URL }}images/button_on.jpg" id="poliv_button" onclick="Dajaxice.web.test(Dajax.process, {'uid':this.id});" width="50%"/></td>
+				<td width="200px" align="left"><img src="{{ STATIC_URL }}images/button_on.jpg" style="cursor: pointer;" id="outdoor_water" onclick="Dajaxice.web.test(Dajax.process, {'src':this.src, 'uid':this.id});" /></td>
 				</tr><tr>
 				<td align="left">Полив газона был включен 2013-02-21 00:00 по программе<br/> <b>Выключить систему автополива</b></td>
 				
@@ -57,7 +57,7 @@
 				
 				<tr>
 				
-				<td width="200px" align="left"><img src="{{STATIC_URL}}images/button_off.jpg" width="50%"/></td>
+				<td width="200px" align="left"><img src="{{STATIC_URL}}images/button_off.jpg" style="cursor: pointer;" id="outdoor_light" onclick="Dajaxice.web.test(Dajax.process, {'src':this.src, 'uid': this.id});"/></td>
 				</tr><tr>
 				<td align="left">Освещение участка было выключено 2013-02-21 02:00 по программу<br/> <b>Включить освещение участка</b></td>
 				
@@ -73,7 +73,7 @@
 		<br/>
 		
 		<div class="block_caption">
-			Освещение участка
+			Освещение дома
 		</div>
 		
 		<div class="block_data">
@@ -83,7 +83,9 @@
 				
 				<tr>
 				
-				<td width="200px" align="right"><img src="{{ STATIC_URL }}images/button_on.jpg" width="50%"/><img src="{{STATIC_URL}}images/button_off.jpg" width="50%"/></td>
+				<td width="200px" align="right">
+					<img src="{{ STATIC_URL }}images/button_on.jpg" style="cursor: pointer;" id="in_light_button1" onclick="Dajaxice.web.test(Dajax.process, {'src':this.src, 'uid': this.id});"/>
+					<img src="{{STATIC_URL}}images/button_off.jpg" style="cursor: pointer;" id="in_light_button2" onclick="Dajaxice.web.test(Dajax.process, {'src':this.src, 'uid': this.id});"/></td>
 				</tr><tr>
 				<td align="left">Управление светом в доме</td>
 				
@@ -92,17 +94,16 @@
 				
 				<tr>
 				
-				<td width="200px" align="right"><img src="{{ STATIC_URL }}images/button_on.jpg" width="50%"/> </td>
-				</tr><tr>
-				<td align="left">Включить систему "приход домой" (включение основного света 50% на первом этаже)</td>
-				
+				<td width="80%" align="left">Включить систему "приход домой" (включение основного света 50% на первом этаже)</td>
+				<td  align="right">
+					<img src="{{ STATIC_URL }}images/button_off.jpg" style="cursor: pointer;" id="in_autolight_button1" onclick="Dajaxice.web.test(Dajax.process, {'src':this.src, 'uid': this.id});"/>
+				</td>
 				</tr>
 				
 				<tr>
 				
-				<td width="200px" align="right"><img src="{{ STATIC_URL }}images/button_on.jpg" width="50%"/> </td>
-				</tr><tr>
 				<td align="left">Включить систему присутствия в доме</td>
+				<td width="200px" align="right"><img src="{{ STATIC_URL }}images/button_off.jpg" style="cursor: pointer;" id="auto_in_light_button" onclick="Dajaxice.web.test(Dajax.process, {'src':this.src, 'uid': this.id});"/> </td>
 				
 				</tr>
 				
@@ -116,7 +117,7 @@
 		
 		
 		<div class="block_caption">
-			<img src="{{ STATIC_URL }}images/logs.jpg" width="8%"/> Журнал системы
+			Журнал системы
 		</div>
 		
 		<div class="block_data">
@@ -141,7 +142,7 @@
 	
 	<div class="internal_block">
 		<div class="block_caption">
-			<img src="{{ STATIC_URL }}images/alerts.jpg" width="8%"/> Критические события
+			Критические события
 		</div>
 		
 		<div class="block_data">
@@ -242,7 +243,7 @@
 		
 		
 		<div class="block_caption">
-			<img src="{{ STATIC_URL }}images/cam.jpg" width="8%"/> Камеры наблюдения
+			Камеры наблюдения
 		</div>
 		
 		<div class="block_data">

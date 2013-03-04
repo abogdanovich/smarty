@@ -21,17 +21,15 @@ import datetime
 #######################################################################
 
 @dajaxice_register
-def test(request, uid):
+def test(request, src, uid):
     dajax = Dajax()
     
-    k = random.randint(0,1)
-    
-    if k:
+    if src == "http://127.0.0.1:81/static/images/button_on.jpg":
 	path = "%simages/button_off.jpg" % (settings.STATIC_URL)
     else:
 	path = "%simages/button_on.jpg" % (settings.STATIC_URL)
     
-    dajax.assign('#poliv_button','src',path)
+    dajax.assign('#'+ uid,'src',path)
     
     return dajax.json()
 
