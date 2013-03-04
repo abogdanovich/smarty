@@ -40,10 +40,7 @@ Smarty Home System
 - django web framework 1.3.1
 - python-ow 2.8p13+dfsg1-5build1
 - python 2.7.x
-- python-redis 2.4.9-1 
-- redis Redis server version 2.2.12 (00000000:0)
 - xampp Linux 1.8.1 (http://www.apachefriends.org/en/xampp.html)
-- celery 3.0.13 (Chiastic Slide) (console: python manage.py celeryd -v 2 -B -s celery -E -l INFO)
 
 **external devices**
 - SSR-25 DA Solid State Relay 25A Output 24V-380V (http://www.ebay.com/itm/271092328688?ssPageName=STRK:MEWAX:IT&_trksid=p3984.m1438.l2649)
@@ -51,7 +48,6 @@ Smarty Home System
 - DHT11 Digital Temperature and Humidity Sensor (http://www.ebay.com/itm/220785316232?ssPageName=STRK:MEWAX:IT&_trksid=p3984.m1438.l2649)
 - Electronic Flow Sensor Electronic Flow Meter 1-30L/M for solar water heater (http://www.ebay.com/itm/Electronic-Flow-Sensor-Electronic-Flow-Meter-1-30L-M-for-solar-water-heater-/261165339795?pt=LH_DefaultDomain_2&hash=item3cceaad493)
 - current transformer SCT-013-030 0-30A Non-invasive AC current sensor Split Core Current Transformer (http://www.ebay.com/itm/SCT-013-030-0-30A-Non-invasive-AC-current-sensor-Split-Core-Current-Transformer-/181072923128?pt=US_Relays_Sensors&hash=item2a28c989f8)
-
 
 **video monitoring**
 - usb video stream (need for zoneminder connection if usb is used) (http://sourceforge.net/projects/mjpg-streamer/)
@@ -63,9 +59,11 @@ Smarty Home System
 - noolight controllers (http://habrahabr.ru/company/boxowerview/blog/168039/ http://www.noo.com.by/produkciya.html)
 
 **PLANS**
-
 - web design
 - additional schemes \ loging description
+
+*DAEMON*
+- run cmd: python /home/alex/django/smarty/daemon/smartyDaemon.py start >> /tmp/smarty.log 2>&1
 
 
 
