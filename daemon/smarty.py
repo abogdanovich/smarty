@@ -8,8 +8,9 @@ import ow
 class Smarty:
     useNotifySend       = True
     useNotifySound      = False #no yet
-    daemonTimeout       = 0.5 #sec
+    daemonTimeout       = 1 #sec
     testvar             = 1
+    
 
     def __init__(self):
         # log init
@@ -20,59 +21,90 @@ class Smarty:
         logging.info('Daemon start')
         
         #ow init
+        logging.info('1-wire network init')
+        ow.init('localhost:4444')
 
         # start notify
-        #self.fireNotify('Start!')
-
-    def fireNotify(self, msg = '', title = 'Smarty Home System'):
-        """
-        Fire notify action
-        """
-        logging.info('Called fireNotify()')
         
-        if (self.useNotifySend):
+    def saveTemperatureSensors(self):
         
-            #commands.getstatusoutput('notify-send -u "%s" -i "%s" "%s" "%s"' % (level, icon, title, msg))
-            if pynotify.init('icon-summary-body'):
-               
-                pynotify.Notification(title, msg, self.getSystemIcon()).show()
-            else:
-                
-                print 'Notify not supported. You need to install python-notify package first.'
-
-        if (self.useNotifySound):
-            # play sound event
-            #if (self.useNotifySound):
-            pass
-
-    def getSystemIcon(self):
-        """
-        Get system icon path
-        example: notification-power-disconnected
-        """
-        return ''
-
-    def getLastCheckTime(self):
-        """
-        To simplicity, time of last modification of the current file is used as the time of last checking
-        """
-        lastCheckTime = os.path.getmtime(__file__)
-        return datetime.fromtimestamp(lastCheckTime)
-
-    def setLastCheckTime(self, time = None):
-        """
-        Set time of last checking -> touch file
-        """
-        #commands.getoutput('touch ' + __file__)
-        #os.system('touch ' + __file__)
-        subprocess.check_output('touch ' + __file__, shell=True)
+        logging.info('Call saveTemperatureSensors()')
+        
         return self
-
-    def getRepositoryPath(self):
-        """
-        Get repository path
-        """
-        return self.repositoryPath
+        
+    def getSewageLoading(self, pio=''):
+        
+        pioList = []
+        s1List = []
+        s2List = []
+        pioList = pio.split(",")
+        
+        s1List = pioList[0:4]
+        s2List = pioList[4:8]
+        
+        logging.info('pio list: %s' % pio)
+        
+        loading1 = 0
+        loading2 = 0
+        
+        for p in s1List:
+            if int(p) == 1:
+                loading1 += 1
+        
+        loading1 *= 25
+        
+        for p in s2List:
+            if int(p) == 1:
+                loading2 += 1
+        
+        loading2 *= 25
+        
+        return loading1,loading2
+    
+    def getControllerStates(self, pio=''):
+        
+        pioList = pio.split(",")
+        
+        if int(pioList[0]) == 1:
+            #water outside is on
+            logging.info('watering lawn is ON')
+        else:
+            logging.info('watering lawn is OFF')
+            
+            
+        if int(pioList[1]) == 1:
+            #water outside is on
+            logging.info('automatic lighting is ON')
+        else:
+            logging.info('automatic lighting is OFF')
+            
+        if int(pioList[3]) == 1:
+            #water outside is on
+            logging.info('Door #1 is open')
+        else:
+            logging.info('Door #1 is closed')
+        
+        if int(pioList[4]) == 1:
+            #water outside is on
+            logging.info('wicket Door is open')
+        else:
+            logging.info('wicket Door is closed')
+        
+        
+        if int(pioList[4]) == 1:
+            #water outside is on
+            logging.info('garage Doors is open')
+        else:
+            logging.info('garage Doors is closed')
+            
+        if int(pioList[5]) == 1:
+            #water outside is on
+            logging.info('home garage Doors is open')
+        else:
+            logging.info('home garage Doors is closed')
+        
+        
+        return self  
 
     def getDaemonTimeout(self):
         """
@@ -80,28 +112,43 @@ class Smarty:
         """
         return self.daemonTimeout
 
-    def check(self, lastCheckTime = None, repositoryPath = None):
-        """
-        Get git log as string
-        """
-        logging.info('Called check()')
-        #if (not lastCheckTime):
-        #    lastCheckTime = self.getLastCheckTime()
-
+    def check(self):
         
-        #only for test
-        self.testvar += 1
-        logging.info('testvar: %s', self.testvar)
-        """
-
-        if (countCommits > 0):
-            logging.info('Test new changes: %s', countCommits)
-            message += '...\n%s new commit(s)\n\n' % countCommits
-
-            #self.fireNotify(message)
-            #self.setLastCheckTime()
-        """
-        logging.info('End check()')
+        if self.testvar >= 240:
+            self.testvar = 1
+            self.saveTemperatureSensors()
+        else:
+            self.testvar += 1
+        
+        s = ow.Sensor('/2867C6697351FF68').temperature
+        logging.info("Sensor data: %s" % s)
+        
+        s = ow.Sensor('/284AEC29CDBAAB95').temperature
+        logging.info("Sensor data: %s" % s)
+        
+        s = ow.Sensor('/28F2FBE3467CC278').temperature
+        logging.info("Sensor data: %s" % s)
+        
+        s = ow.Sensor('/2854F81BE8E78D50').temperature
+        logging.info("Sensor data: %s" % s)
+        
+        s = ow.Sensor('/28765A2E63339F10').temperature
+        logging.info("Sensor data: %s" % s)
+        
+        s = ow.Sensor('/293E017E97EADC99').PIO_ALL
+        logging.info("Controller data: %s" % s)
+        
+        loading = self.getSewageLoading(s)
+        
+        s = ow.Sensor('/293EA141E1FC6712').PIO_ALL
+        logging.info("Controller data: %s" % s)
+        
+        #check controllers state
+        self.getControllerStates(s)
+        
+        logging.info('Канализация 1: %s | Канализация 2: %s ' % (loading[0], loading[1]))
+        
+        
         return self
 
 if __name__ == '__main__':
