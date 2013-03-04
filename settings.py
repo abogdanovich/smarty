@@ -1,10 +1,7 @@
 import os, sys
 import socket
 import logging
-import djcelery
 import pytz
-
-djcelery.setup_loader()
 
 hostname = socket.gethostname()
 
@@ -22,11 +19,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-## Celery config ##
-BROKER_URL = 'redis://localhost:6379/0'
-BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}  # 1 hour.
-CELERY_TIMEZONE = 'Europe/Minsk'
 
 DATABASES = {
     'default': {
@@ -149,7 +141,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'smarty.web',
-    'djcelery',
     'dajaxice', 
     'dajax', 
     # Uncomment the next line to enable the admin:
