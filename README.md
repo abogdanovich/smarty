@@ -20,6 +20,7 @@ Smarty Home System
 **smarty network**
 - 1-wire network (http://en.wikipedia.org/wiki/1-Wire)
 - UTP 5 category cale (http://en.wikipedia.org/wiki/Category_5_cable)
+
 *1-wire sensors*
 - DALLAS DS18B20 - temperature sensor (http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf)
 - DALLAS DS2408 - for relays controlling (http://www.maximintegrated.com/datasheet/index.mvp/id/3818)
@@ -28,19 +29,20 @@ Smarty Home System
 
 **server hardware|software**
 - cubox (http://solid-run.com/cubox)
-- Ubuntu 12.xx
-**owfs**
+
+
+**software**
 - owfs-2.8p13 (http://sourceforge.net/projects/owfs/files/owfs/2.8p13/)
+- Ubuntu 12.xx
+- django for web client 1.3.1
+- python-ow 2.8p13+dfsg1-5build1
+- python 2.7.x
+- apache2
+- mysql db
 
 *owfs command lines*
 - owserver: /opt/owfs/bin/owserver --tester=28,28,28,28,28,28,28,28,28,28,28,29,29 -p 4444 --error_level=9 --foreground --temperature_low=15 --temperature_high=25
 - owhttpd: /opt/owfs/bin/owhttpd -s localhost:4444 -p 8888
-
-**software**
-- django web framework 1.3.1
-- python-ow 2.8p13+dfsg1-5build1
-- python 2.7.x
-- xampp Linux 1.8.1 (http://www.apachefriends.org/en/xampp.html)
 
 **external devices**
 - SSR-25 DA Solid State Relay 25A Output 24V-380V (http://www.ebay.com/itm/271092328688?ssPageName=STRK:MEWAX:IT&_trksid=p3984.m1438.l2649)
@@ -58,12 +60,8 @@ Smarty Home System
 **NOOLIGHT**
 - noolight controllers (http://habrahabr.ru/company/boxowerview/blog/168039/ http://www.noo.com.by/produkciya.html)
 
-**PLANS**
-- web design
-- additional schemes \ loging description
-
 *DAEMON*
-- run cmd: python /home/alex/django/smarty/daemon/smartyDaemon.py start >> /tmp/smarty.log 2>&1
+- run cmd: python /smarty/daemon/smartyDaemon.py start >> /tmp/smarty.log 2>&1
 
 
 
