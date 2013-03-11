@@ -14,11 +14,9 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('web.views',
     # Examples:
-    # url(r'^$', 'smarty.views.home', name='home'),
     
     url(r'^$', 'main'),
     url(r'^sensors', 'sensors'),
-    url(r'^video', 'video'),
     url(r'^settings', 'settings'),
     #url(r'^login', include('login')),
     #url(r'^logout', include('logout')),

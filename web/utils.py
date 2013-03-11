@@ -39,15 +39,15 @@ owserver = 'localhost:4444'
 #Sensors functions
 #########################################################################
 
-def add_sensor(sensor_address, sensor_alias, sensor_family, sensor_extra):
+def add_sensor(sensor_address, sensor_alias, sensor_family, sensor_service):
     
     try:
         sensor = Sensor.objects.get(address=sensor_address)
         sensor.delete()
-        sensor= Sensor(address=sensor_address, alias=sensor_alias, active=0, locked=0, errors=0, family=sensor_family, extra=sensor_extra)
+        sensor= Sensor(address=sensor_address, alias=sensor_alias, active=0, locked=0, errors=0, family=sensor_family, service=sensor_service)
         sensor.save()
     except Sensor.DoesNotExist:
-        sensor= Sensor(address=sensor_address, alias=sensor_alias, active=0, locked=0, errors=0, family=sensor_family, extra=sensor_extra)
+        sensor= Sensor(address=sensor_address, alias=sensor_alias, active=0, locked=0, errors=0, family=sensor_family, service=sensor_service)
         sensor.save()
 
     return sensor.id
@@ -65,11 +65,16 @@ def get_sensor(sensor_address):
 #get sensor object
 def get_sensors(family):
     
-    if family == 'all':
-        sensors = Sensor.objects.all()
-    else:
-        sensors = Sensor.objects.all().filter(family=int(family)) #TODO: change active=1
+    sensors = []
     
+    try:
+        if family == 'all':
+            sensors = Sensor.objects.all()
+        else:
+            sensors = Sensor.objects.all().filter(family=int(family)) #TODO: change active=1
+    except:
+        sensors = []
+        
     return sensors
 
 def set_alert(sensor, priority, alert):
@@ -88,22 +93,25 @@ def get_temperature():
     sensors = Sensor.objects.all().filter(family=28)
     temp_data = []
     
-    for s in sensors:
-        sensor_data = SensorData.objects.filter(sensor=s.address).order_by('-date')[:1]
+    try:
+        for s in sensors:
+            sensor_data = SensorData.objects.filter(sensor=s.address).order_by('-date')[:1]
+                
+            if s.service:
+                coords = s.service.split("|")
+                x = random.randint(10,600)#coords[0]
+                y = random.randint(10,600)#coords[1]
+            else:
+                x = random.randint(10,600)#0
+                y = random.randint(10,600)#0
             
-        if s.service:
-            coords = s.service.split("|")
-            x = random.randint(10,600)#coords[0]
-            y = random.randint(10,600)#coords[1]
-        else:
-            x = random.randint(10,600)#0
-            y = random.randint(10,600)#0
-        
-        if sensor_data:
-            date = convert_unix_date('all', sensor_data[0].date)
-            temp_data.append({'sensor': s.alias, 'date': date, 'data': round(sensor_data[0].data, 1), 'x': x, 'y': y})
-        else:
-            temp_data.append({'sensor': s.alias, 'date': 0, 'data': 0, 'x': x, 'y': y})
+            if sensor_data:
+                date = convert_unix_date('all', sensor_data[0].date)
+                temp_data.append({'sensor': s.alias, 'date': date, 'data': round(sensor_data[0].data, 1), 'x': x, 'y': y})
+            else:
+                temp_data.append({'sensor': s.alias, 'date': 0, 'data': 0, 'x': x, 'y': y})
+    except:
+        temp_data = []
 
     return temp_data
 

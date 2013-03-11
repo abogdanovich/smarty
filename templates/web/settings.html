@@ -4,11 +4,11 @@
 
 <br/>
 
-	<iframe src="http://localhost/zm/index.php" width="100%" frameborder="0" height="50%" ></iframe>
+	<iframe src="http://localhost/zm/index.php" width="100%" frameborder="0" height="25%" ></iframe>
 
 <br/>
 	
-	<table width="100%" border="1" cellpadding="2" cellspacing="5">
+	<table width="100%" border="0" cellpadding="2" cellspacing="0">
 	
 	<tr>
 	<td width="25%">
@@ -42,9 +42,6 @@
 	Время полива<br/>
 	<input type="text" id="c_from_water_time" name="c_from_water_time" value="00:00"/>
 	<input type="text" id="c_to_water_time" name="c_to_water_time" value="02:00"/>
-	<br/>
-	<label for="c_check_raind_days">Количество дней после дождя</label>
-	<input type="text" id="c_check_raind_days" name="c_check_raind_days" value="2"/>
 	
 	<br/>
 	<br/>
@@ -90,10 +87,7 @@
 	<br/>
 	<input type="text" id="c_from_svet_time" name="c_from_svet_time" value="00:00"/>
 	<input type="text" id="c_to_svet_time" name="c_to_svet_time" value="02:00"/>
-	<br/>
-	<br/>
-	<label for="c_check_light_sensor">Учитывать датчика освещения?</label>
-	<input type="checkbox" id="c_check_light_sensor" name="c_check_light_sensor" />
+	
 	<br/>
 	<br/>
 	<input type="button" name="save_light_settings" value="сохранить автоосвещение">
@@ -108,41 +102,46 @@
 	
 	</table>
 
-<br/>
-
+	<br/>
+	
+	<center>
 	<div style="width: 58%;">
 		<div id="home_plan" style="border: 1px dotted gray; padding: 5px; position: relative;">
 			<img src="{{STATIC_URL}}images/home-model2013_1floor.png" width="89%"/><br/>
 			<img src="{{STATIC_URL}}images/home-model2013_2floor.png" width="90%"/>
 			
-			{% for t in temp_data %}
-					
-					{% if t.data < 19 %}
-						<div class="temperature" style="left: {{ t.x }}px; top: {{ t.y }}px;">
-							<div style="position: absolute; left: 0px; top: 0px;"><img src="{{ STATIC_URL }}images/t_cold.jpg"></div>
-							<div style="position: absolute; left: 13px; top: 40px;">{{ t.data}}</div>
-						</div>
-					{% else %}
-						{% if t.data > 19 and t.data < 25 %}
+			{% if temp_data %}
+			
+				{% for t in temp_data %}
+						
+						{% if t.data < 19 %}
 							<div class="temperature" style="left: {{ t.x }}px; top: {{ t.y }}px;">
-								<div style="position: absolute; left: 0px; top: 0px;"><img src="{{ STATIC_URL }}images/t_normal.jpg"></div>
+								<div style="position: absolute; left: 0px; top: 0px;"><img src="{{ STATIC_URL }}images/t_cold.jpg"></div>
 								<div style="position: absolute; left: 13px; top: 40px;">{{ t.data}}</div>
-								
 							</div>
 						{% else %}
-							<div class="temperature" style="left: {{ t.x }}px; top: {{ t.y }}px;">
-								<div style="position: absolute; left: 0px; top: 0px;"><img src="{{ STATIC_URL }}images/t_hot.jpg"></div>
-								<div style="position: absolute; left: 13px; top: 40px;">{{ t.data}}</div>
-							</div>
+							{% if t.data > 19 and t.data < 25 %}
+								<div class="temperature" style="left: {{ t.x }}px; top: {{ t.y }}px;">
+									<div style="position: absolute; left: 0px; top: 0px;"><img src="{{ STATIC_URL }}images/t_normal.jpg"></div>
+									<div style="position: absolute; left: 13px; top: 40px;">{{ t.data}}</div>
+									
+								</div>
+							{% else %}
+								<div class="temperature" style="left: {{ t.x }}px; top: {{ t.y }}px;">
+									<div style="position: absolute; left: 0px; top: 0px;"><img src="{{ STATIC_URL }}images/t_hot.jpg"></div>
+									<div style="position: absolute; left: 13px; top: 40px;">{{ t.data}}</div>
+								</div>
+							{% endif %}
 						{% endif %}
-					{% endif %}
+					
+				{% endfor %}
 				
-			{% endfor %}
+			{% endif %}
 			
 			
 		</div>
 	</div>
-
+	</center>
 
 
 	{% if message %}

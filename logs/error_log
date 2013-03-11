@@ -5283,3 +5283,11 @@
 [Wed Feb 27 13:57:59 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/images/button_off.png, referer: http://smarty:81/
 [Wed Feb 27 13:57:59 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/images/button_off.png, referer: http://smarty:81/
 [Wed Feb 27 06:39:19 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/images/button_off.png, referer: http://smarty:81/
+[Mon Mar 11 22:14:53 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/css/images, referer: http://smarty:81/settings
+[Mon Mar 11 14:16:09 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/css/images, referer: http://smarty:81/settings
+[Mon Mar 11 14:16:09 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/css/images, referer: http://smarty:81/settings
+[Mon Mar 11 14:16:09 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/css/images, referer: http://smarty:81/settings
+[Mon Mar 11 22:16:09 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/css/images, referer: http://smarty:81/settings
+[Mon Mar 11 14:16:09 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/css/images, referer: http://smarty:81/settings
+[Mon Mar 11 14:16:11 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/css/images, referer: http://smarty:81/settings
+[Mon Mar 11 22:16:17 2013] [error] [client 127.0.0.1] File does not exist: /home/alex/django/smarty/static/css/images, referer: http://smarty:81/settings

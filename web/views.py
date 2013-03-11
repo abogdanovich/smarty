@@ -46,7 +46,7 @@ def sensors(request):
     if request.method == 'POST' and 'add_sensor' in request.POST:
         #save sensor
         
-        if utils.add_sensor(request.POST['sensor_address'], request.POST['sensor_alias'], int(request.POST['sensor_family']), request.POST['sensor_extra']):        
+        if utils.add_sensor(request.POST['sensor_address'], request.POST['sensor_alias'], int(request.POST['sensor_family']), request.POST['sensor_service']):        
             #d = dict(request=request, slist=slist, message=message)
             return redirect('/sensors/')
         else:

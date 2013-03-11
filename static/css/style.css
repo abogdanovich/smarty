@@ -11,6 +11,15 @@ body {
 	font-size:11px;
 	padding: 5px;
 }
+
+
+table {
+	background:#FFFFFF;
+	color:#1F1F1F;
+	font-family:Verdana,"BitStream vera Sans",Helvetica,Sans-serif;
+	font-size:11px;
+}
+
 h1, h2, h3, h4, h5, h6 {
 	font-weight:bold;
 	letter-spacing:-0.05em;
