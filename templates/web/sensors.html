@@ -21,23 +21,46 @@
 		{% if s.alias %}
 		<form action="/sensors/" method="post">
 		{% csrf_token %}
-		<input type="text" name="sensor_address" value="{{ s.address }}" style="background-color: green;"/>
+		<input type="text" name="sensor_address" value="{{ s.address }}" style="background-color: green;" disabled="disabled"/>
 		<input type="text" name="sensor_alias" value="{{ s.alias }}" style="background-color: green;"/>
 		<input type="hidden" name="sensor_family" value="{{ s.family }}"/>
-		<input type="hidden" name="sensor_extra" value="{{ s.extra }}"/>
+		<input type="hidden" name="sensor_service" value="{{ s.service }}"/>
 		<input type="submit" name="add_sensor" value="обновить сенсор" />
 	        </form>
+		<br/>
 		{% else %}
-		<form action="/sensors/" method="post">
-		{% csrf_token %}
-		<input type="text" name="sensor_address" value="{{ s.address }}"/>
-		<input type="text" name="sensor_alias" value="f1_"/>
-		<input type="hidden" name="sensor_family" value="{{ s.family }}"/>
-		<input type="hidden" name="sensor_extra" value=""/>
-		<input type="submit" name="add_sensor" value="сохранить сенсор" />
-	        </form>	
-		{% endif %}	
-	
+			{% if s.family == '29' %}
+				
+				<form action="/sensors/" method="post">
+				{% csrf_token %}
+				<input type="text" name="sensor_address" value="{{ s.address }}" disabled="disabled"/>
+				<br/>
+				pio0 <input type="text" name="sensor_pio0alias" value=" pio0 alias"/> <input type="submit" name="add_sensor_pio0alias" value="сохранить сенсор" /><br/>
+				pio1 <input type="text" name="sensor_pio1alias" value="pio1 alias"/> <input type="submit" name="add_sensor_pio0alias" value="сохранить сенсор" /><br/>
+				pio2 <input type="text" name="sensor_pio2alias" value="pio2 alias"/> <input type="submit" name="add_sensor_pio0alias" value="сохранить сенсор" /><br/>
+				pio3 <input type="text" name="sensor_pio3alias" value="pio3 alias"/> <input type="submit" name="add_sensor_pio0alias" value="сохранить сенсор" /><br/>
+				pio4 <input type="text" name="sensor_pio4alias" value="pio4 alias"/> <input type="submit" name="add_sensor_pio0alias" value="сохранить сенсор" /><br/>
+				pio5 <input type="text" name="sensor_pio5alias" value="pio5 alias"/> <input type="submit" name="add_sensor_pio0alias" value="сохранить сенсор" /><br/>
+				pio6 <input type="text" name="sensor_pio6alias" value="pio6 alias"/> <input type="submit" name="add_sensor_pio0alias" value="сохранить сенсор" /><br/>
+				pio7 <input type="text" name="sensor_pio7alias" value="pio7 alias"/> <input type="submit" name="add_sensor_pio0alias" value="сохранить сенсор" /><br/>
+				<input type="hidden" name="sensor_family" value="{{ s.family }}"/>
+				<input type="hidden" name="sensor_service" value=""/>
+				</form>
+				<br/>
+			{% else %}
+				
+				<form action="/sensors/" method="post">
+				{% csrf_token %}
+				<input type="text" name="sensor_address" value="{{ s.address }}" disabled="disabled"/>
+				<input type="text" name="sensor_alias" value="sensor alias"/>
+				<input type="hidden" name="sensor_family" value="{{ s.family }}"/>
+				<input type="hidden" name="sensor_service" value=""/>
+				<input type="submit" name="add_sensor" value="сохранить сенсор" />
+				</form>
+				<br/>
+			{% endif %}
+			
+		{% endif %}
 		
 	{% endfor %}
 {% endif %}

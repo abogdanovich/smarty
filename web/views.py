@@ -31,8 +31,6 @@ def main(request):
     
     temp_data = utils.get_temperature()
     
-    #temp_data2 = utils.get_piodata()
-    
     
     d = dict(request=request, message=message, events=events, alerts=alerts, temp_data=temp_data)
     return render_to_response('web/main.html', d, context_instance=RequestContext(request))

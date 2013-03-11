@@ -7,7 +7,7 @@
 #########################################################################
 
 
-from web.models import Sensor, Temperature, Controller, Alert, Monitor, Calendar
+from web.models import Sensor, SensorData, Alert, Monitor, Calendar
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -82,93 +82,17 @@ def set_alert(sensor, priority, alert):
         
     return alert
 
-
-def save_monitor(message, status):
-
-    try:
-        monitor= Monitor(action=message, date=get_unix_datetime(), status=status)
-        monitor.save()
-    except:
-        monitor = 0
-        
-    return monitor
-
-def update_sensor_errors(sensor_address, flag):
-    #errors = models.IntegerField(default=0) #count of errors | 2 errors - autoblock sensor + set alarm
-    try:
-        sensor = Sensor.objects.get(address=sensor_address)
-        
-        if flag == 0:
-            sensor.errors = 0 # update errors and set 0
-        else:
-            sensor.errors += 1
-                
-            #check if we got 2 errors
-            if check_block_sensor(sensor_address):
-                #let's lock sensor
-                sensor.locked = 1
-                sid = set_alert(sensor.alias, 1, u"нет данных датчика")
-                message = u"ошибка чтения: %s" % (sensor.alias)
-                #print message
-                save_monitor(message, sid.id)    
-            
-            #save sensor state    
-            sensor.save()
-            
     
-    except Sensor.DoesNotExist:
-        sensor = []
-
-    return sensor
-
-
-def check_block_sensor(sensor_address):
-    
-    try:
-        sensor = Sensor.objects.get(address=sensor_address)
-        if sensor.errors == 2:
-            return True
-    except Sensor.DoesNotExist:
-        return False
-    
-    
-def save_temperature(sensor, data):
-    
-    try:
-        sensor = Temperature(sensor=sensor, data=data, date=get_unix_datetime())
-        sensor.save()
-        #print "saved temperature data"
-    except:
-        sensor = []
-
-    return sensor
-
-def save_pio(sensor, data):
-    
-    try:
-        spio = data.split(",")
-        #spio_1 = spio[0:4] #канализация 1 (4 датчика)
-        #spio_2 = spio[4:8] #канализация 1 (4 датчика)
-
-        s = Controller(sensor=sensor, pio_0=spio[0], pio_1=spio[1], pio_2=spio[2], pio_3=spio[3], pio_4=spio[4], pio_5=spio[5], pio_6=spio[6], pio_7=spio[7], date=get_unix_datetime())
-        s.save()
-        #print "saved PIO DATA"
-    except:
-        s = []
-
-    return s
-        
-
 def get_temperature():
 
     sensors = Sensor.objects.all().filter(family=28)
     temp_data = []
     
     for s in sensors:
-        sensor_data = Temperature.objects.filter(sensor=s.address).order_by('-date')[:1]
+        sensor_data = SensorData.objects.filter(sensor=s.address).order_by('-date')[:1]
             
-        if s.extra:
-            coords = s.extra.split("|")
+        if s.service:
+            coords = s.service.split("|")
             x = random.randint(10,600)#coords[0]
             y = random.randint(10,600)#coords[1]
         else:
@@ -180,22 +104,6 @@ def get_temperature():
             temp_data.append({'sensor': s.alias, 'date': date, 'data': round(sensor_data[0].data, 1), 'x': x, 'y': y})
         else:
             temp_data.append({'sensor': s.alias, 'date': 0, 'data': 0, 'x': x, 'y': y})
-
-    return temp_data
-
-def get_piodata():
-
-    sensors = Sensor.objects.all().filter(family=29)
-    temp_data = []
-    
-    for s in sensors:
-        sensor_data = Controller.objects.filter(sensor=s.address).order_by('-date')[:1]
-        #print sensor_data
-        if sensor_data:
-            date = convert_unix_date('all', sensor_data[0].date)
-            temp_data.append({'sensor': s.alias, 'date': date, 'pio_0': sensor_data[0].pio_0, 'pio_1': sensor_data[0].pio_1, 'pio_2': sensor_data[0].pio_2, 'pio_3': sensor_data[0].pio_3, 'pio_4': sensor_data[0].pio_4, 'pio_5': sensor_data[0].pio_5, 'pio_6': sensor_data[0].pio_6, 'pio_7': sensor_data[0].pio_7})
-        else:
-            temp_data.append({'sensor': s.alias, 'date': 0, 'pio_0': 0, 'pio_1': 0, 'pio_2': 0, 'pio_3': 0, 'pio_4': 0, 'pio_5': 0, 'pio_6': 0, 'pio_7': 0})
 
     return temp_data
 
@@ -220,53 +128,6 @@ def get_alert_events():
     
     return alerts
 
-
-
-
-"""
-RRDTOOL
-
-
-   path = os.path.realpath(os.path.dirname(__file__))
-    dbname = "database.rrd"
-    image = "image.png"
-    fullpath = "%s/%s" % (path, dbname)
-    fullimage = "%s/%s" % (path, image)
-        
-    if os.path.isfile(fullpath):
-
-	ow.init('localhost:4444')
-	sensors = ow.Sensor("/").sensorList()
-	s1 = sensors[0].temperature
-	s2 = sensors[1].temperature
-	s3 = sensors[2].temperature
-	    
-	ret = rrd_update(fullpath, 'N:%s:%s:%s' % (metric1, metric2, metric3))
-	
-	ret = rrdtool.graph(fullimage, "--start", "0", "--vertical-label=Temperature",
-	     "-w 500",
-	     "DEF:t1=/home/nc/tt/timecard/database.rrd:metric1:LAST",
-	     "DEF:t2=/home/nc/tt/timecard/database.rrd:metric2:LAST",
-	     "DEF:t3=/home/nc/tt/timecard/database.rrd:metric3:LAST",
-	     "LINE2:t1#006633:metric 1\\r",
-	     "GPRINT:t1:LAST:Average temperature\: %1.0lf ",
-	     "COMMENT:\\n",
-	     "LINE2:t2#0000FF:metric 2\\r",
-	     "GPRINT:t2:LAST:Average temperature\: %1.0lf ",
-	     "COMMENT:\\n",
-	     "LINE2:t3#0073E6:metric 3\\r",
-	     "GPRINT:t3:LAST:Average temperature\: %1.0lf",
-	     "COMMENT:\\n")
-	     	     
-    else:
-	
-	ret = rrdtool.create(fullpath, "--step", "300",
-	    "DS:metric1:GAUGE:600:U:U",
-	    "DS:metric2:GAUGE:600:U:U",
-	    "DS:metric3:GAUGE:600:U:U",
-	    "RRA:LAST:0.5:1:576")
-
-"""
 
 #########################################################################
 # other utils
