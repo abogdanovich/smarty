@@ -26,18 +26,16 @@ class Smarty:
     #init 
     def __init__(self):
         # log init
-        logging.basicConfig(filename = tempfile.gettempdir() + '/smarty.log',
-                            level = logging.DEBUG,
-                            format = '%(asctime)s %(levelname)s: %(message)s',
-                            datefmt = '%Y-%m-%d %I:%M:%S')
+        logging.basicConfig(filename = tempfile.gettempdir() + '/smarty.log', format = u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s', level = logging.DEBUG)
+
         logging.info('Daemon start')
         
         # ow init
         try: 
-            logging.info('1-wire network init: owserver')
+            logging.info('1-wire network init owserver')
             ow.init('localhost:4444')
         except:
-            logging.info('ERROR: 1-wire network init')
+            logging.error('1-wire network init')
             sys.exit(0)
         
 #----------------------------------------------------
@@ -127,13 +125,7 @@ class Smarty:
 
         return int(time.mktime(time.strptime(sdate, "%Y-%m-%d %H:%M")))
     
-#----------------------------------------------------
 
-    def log(self, msg = ''):
-        
-        logging.info(msg)
-        
-        return self
 #----------------------------------------------------
   
     
@@ -144,18 +136,18 @@ class Smarty:
 
         slist = self.DB_SELECT('web_sensor', 'family', '=', 28)
         
-        #self.log(slist[0])
+
         if slist[0] > 0:
         
             for s in slist[1]:
-                #self.log(s)
+
                 s_temp = ow.Sensor(str('/' + s[1])).temperature
-                self.log('sensor ' + s[1] + ' data: ' + s_temp)
+                logging.info('sensor ' + s[1] + ' data: ' + s_temp)
                 #update DB with a real new temp data
                 #self.DB_UPDATE('web_sensor', 'data', s_temp, s[1])
                 
         else:
-            self.log('no sensors in db!')
+            logging.error('no sensors in db!')
         
         return self
     
