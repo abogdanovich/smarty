@@ -5,29 +5,66 @@ import MySQLdb
 
 #==========================================
 
-def DB_SELECT(TABLE, PARAM = '', SIGN = '', VALUE = ''):
+
+def DB_INSERT(table, columns = (), values = ()):
+    
+    flag = False
+    
+    if table != '':
+        try:
+
+            conn = MySQLdb.connect(host="localhost", user="root", passwd="1234", db="smarty", charset='utf8') # name of the data base
+            cursor = conn.cursor()
+            
+            print ("INSERT INTO {0} ({1}) VALUES {2}".format(table, columns, values))
+            
+            cursor.execute("INSERT INTO {0} ({1}) VALUES {2}".format(table, columns, values))
+            conn.commit()
+            flag = True
+    
+        except IOError, e:
+            #TODO: log db error instead of print
+            print "Error %d: %s" % (e.args[0],e.args[1])
+            
+        finally:
+            if cursor:
+                cursor.close()
+            
+            if conn:
+                conn.close()
+    
+    else:
+        #TODO: log db error instead of print
+        print 'table name is empty'
+        
+    return flag
+
+
+def DB_SELECT(table, condition = ''):
     
     numrows = 0
-    records = []
+    results = []
     
-    if TABLE != '':
+    if table != '':
         try:
     
             conn = MySQLdb.connect(host="localhost", user="root", passwd="1234", db="smarty", charset='utf8') # name of the data base
             cursor = conn.cursor()
             
-            if PARAM != '' and SIGN != '' and VALUE != '':
+            if condition != '':
             
-                cursor.execute("SELECT * FROM %s WHERE %s %s %s" % (TABLE, PARAM, SIGN, VALUE))
+                print ("SELECT * FROM {0} WHERE {1}" .format(table, condition))
+                
+                cursor.execute("SELECT * FROM {0} WHERE {1}" .format(table, condition))
             else:
                 
-                cursor.execute("SELECT * FROM %s" % (TABLE))
+                cursor.execute("SELECT * FROM {0}".format(table))
             
             #get selected row count
             numrows = int(cursor.rowcount)
             
             #fetch table records
-            records = cursor.fetchall()
+            results = cursor.fetchall()
     
         except IOError, e:
             #TODO: log db error instead of print
@@ -43,26 +80,27 @@ def DB_SELECT(TABLE, PARAM = '', SIGN = '', VALUE = ''):
     else:
         print 'need to select db table name!'
         
-    return numrows, records
+    return numrows, results
 
 #==========================================
 
-def DB_UPDATE(TABLE, PARAM = '', VALUE = '', SID = ''):
+def DB_UPDATE(table, columns, condition):
     
     flag = False
     #SID = db address field instead of id table record
     
-    if TABLE != '':
+    if table != '' and columns != '' and condition != '':
         try:
 
             conn = MySQLdb.connect(host="localhost", user="root", passwd="1234", db="smarty", charset='utf8') # name of the data base
             cursor = conn.cursor()
             
-            if PARAM != '' and VALUE != '' and SID != '':
-                cursor.execute("UPDATE %s SET %s='%s' WHERE address='%s'" % (TABLE, PARAM, VALUE, SID))
-                conn.commit()
-                flag = True
-    
+            print ("UPDATE {0} SET {1} WHERE {2}".format(table, columns, condition))
+            
+            cursor.execute("UPDATE {0} SET {1} WHERE {2}".format(table, columns, condition))
+            conn.commit()
+            flag = True
+
         except IOError, e:
             #TODO: log db error instead of print
             print "Error %d: %s" % (e.args[0],e.args[1])
@@ -76,7 +114,7 @@ def DB_UPDATE(TABLE, PARAM = '', VALUE = '', SID = ''):
     
     else:
         #TODO: log db error instead of print
-        print 'TABLE name is empty'
+        print 'table\columns or condition are empty'
         
     return flag
 
@@ -84,21 +122,33 @@ def DB_UPDATE(TABLE, PARAM = '', VALUE = '', SID = ''):
     
 #get all sensors
 
-print 'show all sensors'
-slist = DB_SELECT('web_sensor')
-print 'all sensors > %s row count' % slist[0]
+print 'show 28 sensors'
+slist = DB_SELECT('web_sensor', 'family=28')
+
 for row in slist[1] :
         print row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]
+        
+print "----"
 
-print 'update sensor'
+print 'show all sensors'
+slist = DB_SELECT('web_sensor')
 
-if (DB_UPDATE('web_sensor', 'alias', 'ГОСТЕВАЯ', '1111')):
+
+for row in slist[1] :
+        print row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]
+        
+print "----"
+
+if (DB_UPDATE('web_sensor', "alias='ПОЛНАЯ_ЖОПА'", "id='9'")):
     print "update is OK"
 else:
     print "fail to update!"
 
-slist = DB_SELECT('web_sensor')
-for row in slist[1] :
-        print row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]
-        
+print "----"
+
+
+if (DB_INSERT('web_sensordata', ('sensor, data, date'), ('9','1','111111'))):
+    print "INSERT is OK"
+else:
+    print "fail to INSERT!"
 

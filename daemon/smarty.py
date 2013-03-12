@@ -22,6 +22,7 @@ class Smarty:
     daemonTimeout       = 1 # timeout in seconds
     seconds             = 0 # timing in seconds
     tTiming             = 5 * 1 # 5 * 60
+    
 
     #init 
     def __init__(self):
