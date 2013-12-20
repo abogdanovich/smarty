@@ -32,11 +32,11 @@ Smarty Home System
 
 
 **software**
-- owfs-2.8p13 (http://sourceforge.net/projects/owfs/files/owfs/2.8p13/)
+- owfs-2.8p13 (2.9p1 - updated) (http://sourceforge.net/projects/owfs/files/owfs/2.8p13/)
 - Ubuntu 12.xx
-- django for web client 1.3.1
+- django for web client 1.6.1
 - python-ow 2.8p13+dfsg1-5build1
-- python 2.7.x
+- python 2.7.5+
 - apache2
 - mysql db
 

@@ -21,7 +21,7 @@ class Smarty:
     useNotifySound      = False # not yet
     daemonTimeout       = 1 # timeout in seconds
     seconds             = 0 # timing in seconds
-    tTiming             = 5 * 1 # 5 * 60
+    tTiming             = 3 * 1 # 5 * 60
     
 
     #init 
@@ -133,22 +133,35 @@ class Smarty:
     # get temperature sensors
     def checkTemperatureSensors(self):
         
-        slist = []
+        #slist = []
 
-        slist = self.DB_SELECT('web_sensor', 'family', '=', 28)
+        #slist = self.DB_SELECT('web_sensor', 'family', '=', 28)
         
 
-        if slist[0] > 0:
+        #if slist[0] > 0:
         
-            for s in slist[1]:
+            #for s in slist[1]:
 
-                s_temp = ow.Sensor(str('/' + s[1])).temperature
-                logging.info('sensor ' + s[1] + ' data: ' + s_temp)
+        sensors = ow.Sensor("/").sensorList()#ow.Sensor(str('/' + s[1])).temperature
+	for sensor in sensors[:]:
+	    if sensor.type != 'DS18B20':
+		sensors.remove( sensor ) 
+	 
+	# Print column headers
+	for sensor in sensors:
+	    logging.info('sensor address ' + sensor.r_address + ' with data: ' + sensor.temperature)
+	    
+	# Print temperatures
+	#while 1==1:
+	#    print int(time.time()), "\t",
+	#    for sensor in sensors:
+#		print sensor.temperature, "\t",
+	#    print "\n",
                 #update DB with a real new temp data
                 #self.DB_UPDATE('web_sensor', 'data', s_temp, s[1])
-                
-        else:
-            logging.error('no sensors in db!')
+	 
+        #else:
+         #   logging.error('no sensors in db!')
         
         return self
     
