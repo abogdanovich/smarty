@@ -12,17 +12,19 @@ import datetime
 import time
 import ow
 import MySQLdb
+import rrdtool
 
 # Smarty main class
 class Smarty:
     
-# configuration
+    # configuration
     useNotifySend       = True
     useNotifySound      = False # not yet
     daemonTimeout       = 1 # timeout in seconds
     seconds             = 0 # timing in seconds
-    tTiming             = 3 * 1 # 5 * 60
-    
+    tTiming             = 6 * 10 # timing in seconds
+    rrd_base = '/home/nc/install/smarty/smarty-master/smarty_temperature.rrd'
+    rrd_images = '/home/nc/install/smarty/smarty-master/temperature/'
 
     #init 
     def __init__(self):
@@ -39,130 +41,114 @@ class Smarty:
             logging.error('1-wire network init')
             sys.exit(0)
         
-#----------------------------------------------------
-    
-    def DB_SELECT(self, TABLE, PARAM = '', SIGN = '', VALUE = ''):
-      
-      numrows = 0
-      records = []
-      
-      if TABLE != '':
-          try:
-      
-              conn = MySQLdb.connect(host="localhost", user="root", passwd="1234", db="smarty", charset='utf8') # name of the data base
-              cursor = conn.cursor()
-              
-              if PARAM != '' and SIGN != '' and VALUE != '':
-              
-                  cursor.execute("SELECT * FROM %s WHERE %s %s %s" % (TABLE, PARAM, SIGN, VALUE))
-              else:
-                  
-                  cursor.execute("SELECT * FROM %s" % (TABLE))
-              
-              #get selected row count
-              numrows = int(cursor.rowcount)
-              
-              #fetch table records
-              records = cursor.fetchall()
-      
-          except IOError, e:
-              #TODO: log db error instead of print
-              print "Error %d: %s" % (e.args[0],e.args[1])
-              
-          finally:
-              if cursor:
-                  cursor.close()
-              
-              if conn:
-                  conn.close()
-      
-      else:
-          print 'need to select db table name!'
-          
-      return numrows, records
-      
-#----------------------------------------------------
-
-    def DB_UPDATE(self, TABLE, PARAM = '', VALUE = '', SID = ''):
-        
-        flag = False
-        #SID = db address field instead of id table record
-        
-        if TABLE != '':
-            try:
-    
-                conn = MySQLdb.connect(host="localhost", user="root", passwd="1234", db="smarty", charset='utf8') # name of the data base
-                cursor = conn.cursor()
-                
-                if PARAM != '' and VALUE != '' and SID != '':
-                    cursor.execute("UPDATE %s SET %s='%s' WHERE address='%s'" % (TABLE, PARAM, VALUE, SID))
-                    conn.commit()
-                    flag = True
-        
-            except IOError, e:
-                #TODO: log db error instead of print
-                print "Error %d: %s" % (e.args[0],e.args[1])
-                
-            finally:
-                if cursor:
-                    cursor.close()
-                
-                if conn:
-                    conn.close()
-        
-        else:
-            #TODO: log db error instead of print
-            print 'TABLE name is empty'
-            
-        return flag
-
-#----------------------------------------------------
-
-    
-    def getUnixDatetime(self):
-
-        dt = datetime.datetime.utcnow()
-        sdate = dt.strftime('%Y-%m-%d %H:%M')
-
-        return int(time.mktime(time.strptime(sdate, "%Y-%m-%d %H:%M")))
-    
-
-#----------------------------------------------------
-  
     
     # get temperature sensors
     def checkTemperatureSensors(self):
-        
-        #slist = []
 
-        #slist = self.DB_SELECT('web_sensor', 'family', '=', 28)
-        
+	tdata1 = ow.Sensor('/28.B0E116040000').temperature #/28.B0E116040000 - topochnaya
+	tdata2 = ow.Sensor('/28.AADE16040000').temperature #outdoor
+	tdata3 = ow.Sensor('/28.B61C17040000').temperature #garage
+	tdata4 = ow.Sensor('/28.DABF41040000').temperature #kitchen 1st floor
+	tdata5 = 0 #reserved
+	tdata6 = 0 #reserved
+	tdata7 = 0 #reserved
+	tdata8 = 0 #reserved
+	tdata9 = 0 #reserved
+	tdata10 = 0 #reserved
+	
+	logging.info('start data grub')
+	logging.info('sensor topochnaya : ' + tdata1)
+	logging.info('sensor outdoor : ' + tdata2)
+	logging.info('sensor garage : ' + tdata3)
+	logging.info('sensor kitchen 1st f : ' + tdata4)
+	
+	from rrdtool import update as rrd_update
+	ret = rrd_update('/home/nc/install/smarty/smarty-master/smarty_temperature.rrd', 'N:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s' % (tdata1, tdata2, tdata3, tdata4, tdata5, tdata6, tdata7, tdata8, tdata9, tdata10));
 
-        #if slist[0] > 0:
-        
-            #for s in slist[1]:
+	logging.info('END data grub')
+	
 
-        sensors = ow.Sensor("/").sensorList()#ow.Sensor(str('/' + s[1])).temperature
-	for sensor in sensors[:]:
-	    if sensor.type != 'DS18B20':
-		sensors.remove( sensor ) 
-	 
-	# Print column headers
-	for sensor in sensors:
-	    logging.info('sensor address ' + sensor.r_address + ' with data: ' + sensor.temperature)
+	for sched in ['day' , 'week', 'month', 'year']:
+	
+	    if sched == 'week':
+		period = 'w'
+	    elif sched == 'day':
+		period = 'd'
+	    elif sched == 'month':
+		period = 'm'
+	    elif sched == 'year':
+		period = 'y'
 	    
-	# Print temperatures
-	#while 1==1:
-	#    print int(time.time()), "\t",
-	#    for sensor in sensors:
-#		print sensor.temperature, "\t",
-	#    print "\n",
-                #update DB with a real new temp data
-                #self.DB_UPDATE('web_sensor', 'data', s_temp, s[1])
-	 
-        #else:
-         #   logging.error('no sensors in db!')
-        
+	    ret = rrdtool.graph("/home/nc/install/smarty/smarty-master/temperature/temperature-%s.png" % (sched),
+		 "--imgformat", "PNG",
+		 "--width", "800",
+		 "--height", "600",
+		 "--start", "-1%s" % (period),
+		 "--vertical-label", "T data",
+		 "--title", "Temperature statistic",   
+		 "-w 600",
+		 "DEF:tdata1=/home/nc/install/smarty/smarty-master/smarty_temperature.rrd:T1:AVERAGE",
+		 "DEF:tdata2=/home/nc/install/smarty/smarty-master/smarty_temperature.rrd:T2:AVERAGE",
+		 "DEF:tdata3=/home/nc/install/smarty/smarty-master/smarty_temperature.rrd:T3:AVERAGE",
+		 "DEF:tdata4=/home/nc/install/smarty/smarty-master/smarty_temperature.rrd:T4:AVERAGE",
+		 "DEF:tdata5=/home/nc/install/smarty/smarty-master/smarty_temperature.rrd:T5:AVERAGE",
+		 "DEF:tdata6=/home/nc/install/smarty/smarty-master/smarty_temperature.rrd:T6:AVERAGE",
+		 "DEF:tdata7=/home/nc/install/smarty/smarty-master/smarty_temperature.rrd:T7:AVERAGE",
+		 "DEF:tdata8=/home/nc/install/smarty/smarty-master/smarty_temperature.rrd:T8:AVERAGE",
+		 "DEF:tdata9=/home/nc/install/smarty/smarty-master/smarty_temperature.rrd:T9:AVERAGE",
+		 "DEF:tdata10=/home/nc/install/smarty/smarty-master/smarty_temperature.rrd:T10:AVERAGE",
+		 
+		 "LINE2:tdata1#E39B1E:Topochnaya",
+		 "GPRINT:tdata1:LAST:Now \: %2.1lf ",
+		 "GPRINT:tdata1:MIN:Min \: %2.1lf ",
+		 "GPRINT:tdata1:MAX:Max \: %2.1lf \\r",
+		 
+		 "LINE2:tdata2#E31E48:Outdoor ",
+		 "GPRINT:tdata2:LAST:Now \: %2.1lf ",
+		 "GPRINT:tdata2:MIN:Min \: %2.1lf ",
+		 "GPRINT:tdata2:MAX:Max \: %2.1lf \\r",
+		 
+		 "LINE2:tdata3#1E1EE3:Garage ",
+		 "GPRINT:tdata3:LAST:Now \: %2.1lf ",
+		 "GPRINT:tdata3:MIN:Min \: %2.1lf ",
+		 "GPRINT:tdata3:MAX:Max \: %2.1lf \\r",
+		 
+		 "LINE2:tdata4#B8E0AB:Kitchen ",
+		 "GPRINT:tdata4:LAST:Now \: %2.1lf ",
+		 "GPRINT:tdata4:MIN:Min \: %2.1lf ",
+		 "GPRINT:tdata4:MAX:Max \: %2.1lf \\r",
+		 
+		 "LINE1:tdata5#B8E0AB:NA ",
+		 "GPRINT:tdata5:LAST:Now \: %2.1lf ",
+		 "GPRINT:tdata5:MIN:Min \: %2.1lf ",
+		 "GPRINT:tdata5:MAX:Max \: %2.1lf \\r",
+		 
+		 "LINE1:tdata6#B8E0AB:NA ",
+		 "GPRINT:tdata6:LAST:Now \: %2.1lf ",
+		 "GPRINT:tdata6:MIN:Min \: %2.1lf ",
+		 "GPRINT:tdata6:MAX:Max \: %2.1lf \\r",
+		 
+		 "LINE1:tdata7#B8E0AB:NA ",
+		 "GPRINT:tdata7:LAST:Now \: %2.1lf ",
+		 "GPRINT:tdata7:MIN:Min \: %2.1lf ",
+		 "GPRINT:tdata7:MAX:Max \: %2.1lf \\r",
+		 
+		 "LINE1:tdata8#B8E0AB:NA ",
+		 "GPRINT:tdata8:LAST:Now \: %2.1lf ",
+		 "GPRINT:tdata8:MIN:Min \: %2.1lf ",
+		 "GPRINT:tdata8:MAX:Max \: %2.1lf \\r",
+		 
+		 "LINE1:tdata9#B8E0AB:NA ",
+		 "GPRINT:tdata9:LAST:Now \: %2.1lf ",
+		 "GPRINT:tdata9:MIN:Min \: %2.1lf ",
+		 "GPRINT:tdata9:MAX:Max \: %2.1lf \\r",
+		 
+		 "LINE1:tdata10#B8E0AB:NA ",
+		 "GPRINT:tdata10:LAST:Now \: %2.1lf ",
+		 "GPRINT:tdata10:MIN:Min \: %2.1lf ",
+		 "GPRINT:tdata10:MAX:Max \: %2.1lf \\r")	
+	
+	
         return self
     
 #----------------------------------------------------    
@@ -194,164 +180,3 @@ if __name__ == '__main__':
     c = Smarty()
     c.check()
 #----------------------------------------------------
-    
-#trach code 
-    
-    
-"""
-
-        #s = ow.Sensor('/293EA141E1FC6712').PIO_ALL
-        #logging.info("Controller data: %s" % s)
-        
-        #check controllers state
-        #self.getControllerStates(s)
-        
-
-# -*- coding: utf-8 -*-
-
-
-import MySQLdb
-
-try:
-    con = MySQLdb.connect(host="localhost", user="root", passwd="5213", db="test")
-    cur = con.cursor()
-    cur.execute('SET NAMES `utf8`')
-    cur.execute('SELECT `name` FROM `city` ORDER BY `name` DESC')
-    result = cur.fetchall()
-    for row in result:
-        print(row[0])        
-except MySQLdb.Error:
-    print(db.error())
-
-#########################################################################
-# Smarty home system module
-# Django celery tasks
-# author Alex Bogdanovich
-# 2013 
-#########################################################################
-
-from celery.task import periodic_task
-from celery.schedules import crontab
-import utils
-import ow
-
-#########################################################################
-
-#########################################################################
-# task1 опрос датчиков температуры, влажности воздуха, датчика осадков
-# period = всегда каждые 5 минут
-# сохранение данных, построение графиков температуры, влажности
-#########################################################################
-# for test - опрос каждую минуту
-
-@periodic_task(ignore_result=True, run_every=crontab(hour="*", minute="*/1", day_of_week="*"))
-def get_temperature():
-    # берем все датчики и по очереди каждого опрашиваем
-    sensors = utils.get_sensors(28) #get only 28 family type sensors
-
-    #заносим в монитор события опроса
-    #message = u"получение температу"
-    #utils.save_monitor(message, 0)
-    
-    ow.init(utils.owserver)
-    
-    for s in sensors:
-	try:
-	    s_temp = ow.Sensor(str('/' + s.address)).temperature
-	    # если было накопление error на сенсоре- обнуляем его в случае нормальной работы
-	    
-	    if s_temp:
-		if utils.save_temperature(s.address, s_temp):
-		    message = u"сохранения данных: %s" % (s.alias)
-		    #print message
-		    utils.save_monitor(message, 0)
-		else:
-		    message = u"ошибка сохранения данных: %s" % (s.alias)
-		    #print message
-		    utils.save_monitor(message, 0)
-		    
-	except:
-	    # если датчик не отвечает - увеличиваем поле errors заносим alarm
-	    utils.update_sensor_errors(s.address, 1) #sensor error! set+1 for sensor errors
-
-    #message = u"опрос датчиков температуры завершен"
-    utils.save_monitor(message, 0)
-    
-#########################################################################
-
-# TODO: сделать возможно управлять поливом и освещением по месячно, динамично меняя через web сайт
-# тогда система будет каждую минуту будет проверять в базе на дату и время (можно ли это сделать)
-
-# TODO: control sensors errors >= 2 to lock (do not accumulate them in errors field)
-
-
-#########################################################################
-# task2 опрос датчиков уровня канализации, 2 канализации по 4 положения в каждом = 8 ног
-# датчик DS2408 POI_0..POI_7
-# period = всегда каждые 5 минут
-# сохранение данных в зависимости от полученных данных, если изменилось
-# состояние от предыдущего - 1 положение = 25% заполнение ёмкости  
-@periodic_task(ignore_result=True, run_every=crontab(hour="*", minute="*/5", day_of_week="*"))
-def get_sewage():
-    # берем все датчики и по очереди каждого опрашиваем
-    sensor = utils.get_sensor(str('293EA141E1FC6712')) #get only 28 family type sensors
-
-    #заносим в монитор события опроса
-    #message = u"программа получения уровня канализации стратовала"
-    #utils.save_monitor(message, 0)
-    
-    ow.init(utils.owserver)
-    
-    try:
-	#print sensor.address
-	data = ow.Sensor(str('/' + sensor.address)).PIO_ALL
-	#print s_sewage
-	
-	# если было накопление error на сенсоре- обнуляем его в случае нормальной работы
-	
-	if data:
-	    if utils.save_pio(sensor.address, data):
-		message = u"сохранения данных: %s" % (sensor.alias)
-		#print message
-		utils.save_monitor(message, 0)
-	    else:
-		message = u"ошибка сохранения данных: %s" % (sensor.alias)
-		#print message
-		utils.save_monitor(message, 0)
-		
-    except:
-	# если датчик не отвечает - увеличиваем поле errors заносим alarm
-	utils.update_sensor_errors(sensor.address, 1) #sensor error! set+1 for sensor errors
-
-    #message = u"программа получения уровня канализации ЗАВЕРШЕНА"
-    #utils.save_monitor(message, 0)
-
-#########################################################################
-
-#########################################################################
-# task3 включение автополива с проверкой:
-# 1. можно ли поливать (анализ датчика осадков)
-# 2. проверка - есть ли вода - тогда включаем и проверяем что клапана включились
-# датчик DS2408 POI_0..POI_7
-#########################################################################
-
-#########################################################################
-# task4 выключение автополива с проверкой:
-# проверка выключена ли вода
-# датчик DS2408 POI_0..POI_7
-#########################################################################
-
-#########################################################################
-# task5 включение наружного освещения с проверкой на датчик освещения (достаточно ли темно)
-# датчик DS2408 POI_0..POI_7
-# TODO: проверка включения освещения через датчик освещение или напряжение
-#########################################################################
-
-#########################################################################
-# task6 выключение наружного освещения с проверкой на датчик освещения (достаточно ли темно)
-# проверка датчика освещения (действительно ли выключилось освещение)
-# датчик DS2408 POI_0..POI_7
-# TODO: проверка включения освещения через датчик освещение или напряжение
-#########################################################################
-
-"""
